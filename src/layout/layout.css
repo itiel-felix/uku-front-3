@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+.header-button {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.header-button:hover {
+    background-color: var(--dark-slate-gray-light);
+    color: var(--safron-mango-dark);
+}

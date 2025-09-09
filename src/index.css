@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+:root {
+  --sandy-brown-light: #f5b881;
+  --sandy-brown: #f4a462;
+  --sandy-brown-dark: #c36c00;
+
+  --jungle-green-light: #49b9aa;
+  --jungle-green: #2a9d90;
+  --jungle-green-dark: #1a766a;
+
+  --blue-dianne: #274754;
+  --blue-dianne-light: #3e5f70;
+  --blue-dianne-dark: #274754;
+
+
+  --burnt-sienna: #e76e50;
+  --burnt-sienna-light: #f08a69;
+  --burnt-sienna-dark: #a34e34;
+
+  --safron-mango: #f9c54e;
+  --safron-mango-light: #f5dfc1;
+  --safron-mango-dark: #faa035;
+
+  --dark-slate-gray: #2a2a2a;
+  --dark-slate-gray-dark: #1e1e1e;
+  --dark-slate-gray-light: #3d3d3d;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+}
+
+.stamp-border {
+  /* Change this value to adjust the stamp perforation size: */
+  --radius: 6px;
+
+
+  background-image:
+    radial-gradient(var(--radius),
+      transparent 98%,
+      var(--safron-mango-light)),
+    linear-gradient(var(--safron-mango-light) 0 0);
+  background-repeat:
+    round,
+    no-repeat;
+  background-position:
+    calc(var(--radius) * -1.5) calc(var(--radius) * -1.5),
+    50%;
+  background-size:
+    calc(var(--radius) * 3) calc(var(--radius) * 3),
+    calc(100% - var(--radius) * 3) calc(100% - var(--radius) * 3);
+}

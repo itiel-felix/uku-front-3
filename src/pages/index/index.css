@@ -1,0 +1,17 @@
+.play-now-button {
+    cursor: pointer;
+    width: 60%;
+    height: 100%;
+    background-color: var(--safron-mango-dark);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-now-button:hover {
+    transform: scale(1.02);
+    transition: transform 0.1s ease;
+}
