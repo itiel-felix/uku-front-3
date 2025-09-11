@@ -1,17 +1,22 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Layout from './layout'
 import FirstPage from './pages/index/index'
+import Tab from './pages/tab/index'
+import TabPage from './pages/tab/index'
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div className="h-screen w-screen  flex items-center justify-center bg-red-500" style={{ backgroundColor: 'var(--safron-mango-light)' }}>
-        <FirstPage />
+    <Router>
+      <div className="h-screen w-full flex items-center justify-center bg-red-500" style={{ backgroundColor: 'var(--safron-mango-light)' }}>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<FirstPage />} />
+            <Route path="/tab" element={<Tab />} />
+            <Route path="/tab/:id" element={<TabPage />} />
+          </Routes>
+        </Layout>
       </div>
-    </>
+    </Router>
   )
 }
 

@@ -21,7 +21,7 @@
   --burnt-sienna-dark: #a34e34;
 
   --safron-mango: #f9c54e;
-  --safron-mango-light: #f5dfc1;
+  --safron-mango-light: #ffd5ae;
   --safron-mango-dark: #faa035;
 
   --dark-slate-gray: #2a2a2a;
@@ -33,6 +33,61 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
 
+}
+
+/* index.css */
+/* Light */
+@font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-Regular.ttf') format('truetype');
+  font-weight: 300;
+  /* Peso numérico para light */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular */
+@font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-Regular.ttf') format('truetype');
+  font-weight: 400;
+  /* Peso numérico para normal/regular */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  /* Mismo peso que regular pero con estilo italic */
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-Bold.ttf') format('truetype');
+  font-weight: 700;
+  /* Peso numérico para bold */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  /* Mismo peso que bold pero con estilo italic */
+  font-style: italic;
+  font-display: swap;
+}
+
+body {
+  font-family: 'HeadingNow', sans-serif;
 }
 
 .stamp-border {

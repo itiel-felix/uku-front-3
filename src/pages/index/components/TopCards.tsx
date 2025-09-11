@@ -18,18 +18,19 @@ const TopCards = (
     return (
         <div className="w-full h-full flex flex-col min-w-0">
             <div className="w-full h-full flex flex-col justify-center min-w-0">
-                <div className="text-2xl font-bold text-black">{title}</div>
+                <div className="text-5xl font-bold text-black">{title}</div>
                 <div
                     className="w-full h-full grid gap-3 min-w-0"
                     style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
                 >
                     {newElements.map((element, index) => (
                         <Card
-                            key={index}
+                            key={element.id || index}
                             image_url={'https://aimm.edu/hs-fs/hubfs/rock-guitar-genre.jpg?width=719&name=rock-guitar-genre.jpg'}
                             title={element.name}
                             description={element.sub_title}
                             button_text={element.button_text}
+                            songId={element.id}
                         />
                     ))}
                 </div>
