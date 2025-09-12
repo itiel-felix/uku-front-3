@@ -26,7 +26,7 @@ const TabPage = () => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col gap-6">
+        <div className="w-full h-full flex flex-col gap-6 overflow-y-autos">
             {/* Botón de regreso */}
             <button
                 onClick={() => navigate(-1)}
@@ -35,7 +35,7 @@ const TabPage = () => {
                 ← Volver
             </button>
             {/* Header */}
-            <div className="w-full h-full flex flex-col ">
+            <div className="w-full h-full flex flex-col sticky top-16">
                 <div>
                     <h1 className="text-4xl font-bold text-gray-800">{song?.name}</h1>
                     <h2 className="text-2xl text-gray-600">{song?.sub_title}</h2>

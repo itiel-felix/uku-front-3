@@ -1,32 +1,36 @@
 
 import TodaysSong from './components/TodaysSong'
-import TopCards from './components/TopCards'
 import './index.css'
 import { Songs } from '../../dummy_data/Cards'
-import { UprisingSongs } from '../../dummy_data/UprisingSongs'
 import NewbiesSection from './components/NewbiesSection'
+import List from '../../general_components/List'
+import { useNavigate } from 'react-router-dom'
 
 function App() {
+    const navigate = useNavigate()
     return (
-        <div className="w-full h-full flex flex-col gap-5">
+        <div className="w-full h-full flex flex-col gap-5 ">
             {<TodaysSong />}
             <NewbiesSection />
             <div className="w-full flex flex-col gap-10">
                 <div className="w-full h-full flex gap-10">
-                    <div className="h-full flex-2 flex flex-col">
-                        <TopCards title="TOP CARDS" elements={Songs} columns={4} />
-                    </div>
-                    <div className="h-full flex-1 flex flex-col">
-                        <TopCards title="UPRISING SONGS" elements={UprisingSongs} columns={2} />
+                    <div className="h-full flex-2 flex flex-col gap-2">
+
+                        <div className="text-5xl font-bold text-black">TOP SONGS</div>
+                        <List items={Songs} onClick={(id) => navigate(`/tab/${id}`)} />
                     </div>
                 </div>
-                <div className="w-full h-full flex gap-10">
-                    <div className="h-full flex-2 flex flex-col">
-                        <TopCards title="ARTISTS" elements={Songs} columns={4} />
-                    </div>
-                    <div className="h-full flex-1 flex flex-col">
-                        <TopCards title="GENRES" elements={UprisingSongs} columns={2} />
-                    </div>
+                <div className="w-full h-full flex flex-col gap-10">
+                    <div className="text-5xl font-bold text-black">UPRISING SONGS</div>
+                    <List items={Songs} />
+                </div>
+                <div className="w-full h-full flex flex-col gap-10">
+                    <div className="text-5xl font-bold text-black">UPRISING SONGS</div>
+                    <List items={Songs} />
+                </div>
+                <div className="w-full h-full flex flex-col gap-10">
+                    <div className="text-5xl font-bold text-black">UPRISING SONGS</div>
+                    <List items={Songs} />
                 </div>
             </div>
         </div>
