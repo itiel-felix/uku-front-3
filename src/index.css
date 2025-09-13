@@ -39,9 +39,8 @@
 /* Light */
 @font-face {
   font-family: 'HeadingNow';
-  src: url('./assets/fonts/HeadingNow-Regular.ttf') format('truetype');
-  font-weight: 300;
-  /* Peso numérico para light */
+  src: url('./assets/fonts/HeadingNow-Light.ttf') format('truetype');
+  font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
@@ -51,7 +50,6 @@
   font-family: 'HeadingNow';
   src: url('./assets/fonts/HeadingNow-Regular.ttf') format('truetype');
   font-weight: 400;
-  /* Peso numérico para normal/regular */
   font-style: normal;
   font-display: swap;
 }
@@ -61,33 +59,54 @@
   font-family: 'HeadingNow';
   src: url('./assets/fonts/HeadingNow-RegularItalic.ttf') format('truetype');
   font-weight: 400;
-  /* Mismo peso que regular pero con estilo italic */
   font-style: italic;
   font-display: swap;
 }
 
 /* Bold */
-@font-face {
+/* @font-face {
   font-family: 'HeadingNow';
   src: url('./assets/fonts/HeadingNow-Bold.ttf') format('truetype');
   font-weight: 700;
-  /* Peso numérico para bold */
   font-style: normal;
   font-display: swap;
-}
+} */
 
 /* Bold Italic */
-@font-face {
+/* @font-face {
   font-family: 'HeadingNow';
   src: url('./assets/fonts/HeadingNow-BoldItalic.ttf') format('truetype');
   font-weight: 700;
-  /* Mismo peso que bold pero con estilo italic */
   font-style: italic;
   font-display: swap;
-}
+} */
 
 body {
   font-family: 'HeadingNow', sans-serif;
+}
+
+/* Aplicar Arial automáticamente a todos los números */
+* {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Configurar fuente híbrida: HeadingNow para texto, Arial para números */
+* {
+  font-family: 'HeadingNow', Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Forzar Arial en elementos que contienen números usando unicode-range */
+@font-face {
+  font-family: 'HeadingNowWithArialNumbers';
+  src: local('HeadingNow'), local('Arial');
+  unicode-range: U+0030-0039;
+  /* Solo números 0-9 */
+}
+
+* {
+  font-family: 'HeadingNowWithArialNumbers', 'HeadingNow', Arial, sans-serif;
 }
 
 .stamp-border {

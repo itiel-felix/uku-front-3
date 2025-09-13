@@ -1,9 +1,5 @@
 
-import { Link, useLocation } from "react-router-dom"
-
-
 const LeftSideBar = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) => {
-    const location = useLocation()
 
     return (
         <div className="w-full h-full flex flex-col bg-gray-800">
@@ -12,22 +8,14 @@ const LeftSideBar = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) =>
                     <div className="h-full w-full flex flex-col flex-start">
 
                         <div className="w-full flex flex-col flex-start">
-                            <Link
-                                to="/"
-                                className={`
-                                    header-button 
-                                    !justify-start 
-                                    ${location.pathname === '/'
-                                        ? 'text-[var(--safron-mango)]'
-                                        : ''
-                                    }`}
-                                onClick={() => setIsOpen(false)}
-                            >
-                                HOME
-                            </Link>
-
-                            <div className="header-button !justify-start " onClick={() => setIsOpen(false)}>GENRES</div>
-                            <div className="header-button !justify-start " onClick={() => setIsOpen(false)}>ARTISTS</div>
+                            <div className="header-button !justify-start text-xl " onClick={() => setIsOpen(false)}>TABS</div>
+                            <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>GENRES</div>
+                            <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>ARTISTS</div>
+                        </div>
+                        <div className="w-full flex flex-col flex-start">
+                            <div className="header-button !justify-start text-xl " onClick={() => setIsOpen(false)}>MORE</div>
+                            <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>TOOLS</div>
+                            <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>ABOUT</div>
                         </div>
                     </div>
                 </div>

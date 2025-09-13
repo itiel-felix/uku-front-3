@@ -1,14 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { Songs } from '../../dummy_data/Cards'
-import { CardElement } from '../../interfaces/CardElement'
+import { Song } from '../../interfaces/Song'
 import Rating from '../../general_components/Rating'
-import { tab } from '../../dummy_data/Tab'
 const TabPage = () => {
     const { id } = useParams<{ id: string }>()
     const navigate = useNavigate()
 
     // Buscar la canción por ID
-    const song: CardElement | undefined = Songs.find(song => song.id === id)
+    const song: Song | undefined = undefined
 
     if (!song) {
         return (
@@ -26,7 +24,7 @@ const TabPage = () => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col gap-6 overflow-y-autos">
+        <div className="w-full h-full flex flex-col gap-6">
             {/* Botón de regreso */}
             <button
                 onClick={() => navigate(-1)}
@@ -35,13 +33,13 @@ const TabPage = () => {
                 ← Volver
             </button>
             {/* Header */}
-            <div className="w-full h-full flex flex-col sticky top-16">
+            <div className="w-full h-full flex flex-col sticky ">
                 <div>
                     <h1 className="text-4xl font-bold text-gray-800">{song?.name}</h1>
-                    <h2 className="text-2xl text-gray-600">{song?.sub_title}</h2>
+                    <h2 className="text-2xl text-gray-600">{song?.artist}</h2>
                 </div>
                 <div>
-                    <p className="text-sm text-gray-600">Tab submitted by: {song?.sub_title}</p>
+                    <p className="text-sm text-gray-600">Tab submitted by: {song?.submitted_by}</p>
                     <p className="text-sm text-gray-600">
                         Difficulty: Beginner</p>
                     <Rating onClick={() => { }} />
@@ -49,7 +47,7 @@ const TabPage = () => {
                 <span
                     className="border-b-1 border-gray-400"
                 >
-                    {song?.button_text}
+                    {song?.genre}
                 </span>
             </div>
 
@@ -63,6 +61,7 @@ const TabPage = () => {
                 }}
             >
                 {tab}
+                finish
             </div>
 
 
