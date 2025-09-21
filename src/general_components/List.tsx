@@ -2,18 +2,26 @@ import { ListElement } from "../interfaces/ListElement"
 
 const List = ({ items,
     onClick,
-    onArtistClick,
+    onSubtitleClick,
     isLoading,
-}: { items: ListElement[], onClick?: (id: string) => void, onArtistClick?: (id: string) => void, sub_title?: string | undefined, isLoading?: boolean }) => {
+    elements_qty,
+}: { items: ListElement[], onClick?: (id: string) => void, onSubtitleClick?: (id: string) => void, sub_title?: string | undefined, isLoading?: boolean, elements_qty?: number }) => {
 
     const generateListItems = () => {
         if (isLoading) {
-            return (
-                <li className="list-row">
-                    <div className="text-4xl font-thin opacity-30 tabular-nums font-bold text-black" style={{ fontFamily: 'Arial' }}>1</div>
-                    <div><img className="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" /></div>
-                </li>
-            )
+            const listItems = Array.from({ length: elements_qty ?? 10 }, (_, index) => {
+                return (
+                    <li key={index} className="list-row w-full flex flex-row">
+                        <div className="skeleton h-20  aspect-square"></div>
+                        <div className="flex flex-col gap-2 w-full">
+                            <div className="skeleton h-3 w-full"></div>
+                            <div className="skeleton h-3 w-full"></div>
+                            <div className="skeleton h-3 w-full"></div>
+                        </div>
+                    </li>
+                )
+            })
+            return listItems
         }
         return items.map((item, index) => {
             return (
@@ -21,13 +29,15 @@ const List = ({ items,
                     onClick?.(item.id ?? '')
                 }}>
                     <div className="text-4xl font-thin opacity-30 tabular-nums font-bold text-black" style={{ fontFamily: 'Arial' }}>{index + 1}</div>
-                    <div><img className="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" /></div>
+                    <div>
+                        <img className="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" />
+                    </div>
                     <div className="list-col-grow text-black">
                         <div>{item.title}</div>
                         <div className="text-xs w-fit uppercase font-semibold opacity-60 text-black hover:cursor-pointer hover:text-blue-500"
                             onClick={(e) => {
                                 e.stopPropagation();
-                                onArtistClick?.(item.subtitle ?? '');
+                                onSubtitleClick?.(item.subtitle ?? '');
                             }}>
                             {item.subtitle ?? ''}
                         </div>

@@ -1,12 +1,22 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { Song } from '../../interfaces/Song'
 import Rating from '../../general_components/Rating'
+import { useEffect, useState } from 'react'
+import { song as songApi } from '../../services/api'
 const TabPage = () => {
     const { id } = useParams<{ id: string }>()
     const navigate = useNavigate()
 
     // Buscar la canción por ID
-    const song: Song | undefined = undefined
+    const [song, setSong] = useState<Song | undefined>(undefined)
+
+    useEffect(() => {
+        const loadSong = async () => {
+            const responseSong = await songApi.getSongs(id ?? '', undefined)
+            setSong(responseSong as Song)
+        }
+        loadSong()
+    }, [])
 
     if (!song) {
         return (
@@ -47,7 +57,7 @@ const TabPage = () => {
                 <span
                     className="border-b-1 border-gray-400"
                 >
-                    {song?.genre}
+                    {song?.genre ?? ''}
                 </span>
             </div>
 
@@ -60,7 +70,7 @@ const TabPage = () => {
                     whiteSpace: 'pre'
                 }}
             >
-                {tab}
+                {song?.tab}
                 finish
             </div>
 

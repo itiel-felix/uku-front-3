@@ -58,7 +58,8 @@ function App() {
                             items={formatSongs(songs, artists)}
                             onClick={(id) => navigate(`/tab/${id}`)}
                             sub_title={'artist'}
-                            onArtistClick={(artistName: string) => navigate(`/artist/${artistName}`)}
+                            onArtistClick={(artist_id: string) => navigate(`/artist/${artist_id}`)}
+                            elements_qty={10}
                         />
                     </div>
                 </div>

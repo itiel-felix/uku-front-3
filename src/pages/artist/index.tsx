@@ -2,19 +2,37 @@ import { useParams } from "react-router-dom"
 import List from "../../general_components/List"
 import { useNavigate } from "react-router-dom"
 import { Artist, Song } from "../../interfaces"
-const ArtistPage = () => {
-    const { artistName } = useParams<{ artistName: string }>()
+import { useState, useEffect } from "react"
+
+//A Actions
+import { song, artist as artistApi } from "../../services/api"
+const ArtistPage = ({
+    propArtist,
+}: {
+    propArtist: Artist,
+}) => {
+    const [artist, setArtist] = useState<Artist>(propArtist)
+    const { id: artist_id } = useParams<{ id: string }>()
+    // const [artistSongs, setArtistSongs] = useState<Song[]>([])
     const navigate = useNavigate()
-    const artists = [] as Artist[]
-    const artist = artists.find((artist) => artist.name === artistName)
-    const artistSongs = [] as Song[]
+
+    useEffect(() => {
+        const loadArtist = async () => {
+            const responseArtist = await artistApi.getArtists(artist_id ?? '', undefined)
+            // const artistSongs = await song.getSongs(undefined, { artist_id: propArtist.id })
+            setArtist(responseArtist as Artist)
+        }
+        if (propArtist) {
+            loadArtist()
+        }
+    }, [])
 
     if (!artist) {
         return (
             <div className="flex items-center justify-center h-96">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-600 mb-4">Artista no encontrado</h1>
-                    <p className="text-gray-500">El artista "{artistName}" no existe en nuestra base de datos.</p>
+                    <p className="text-gray-500">El artista no existe en nuestra base de datos.</p>
                 </div>
             </div>
         )
@@ -93,12 +111,12 @@ const ArtistPage = () => {
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold mb-6">Canciones Populares</h2>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                        <List items={artistSongs} onClick={(id) => navigate(`/tab/${id}`)} />
+                        <List items={[]} onClick={(id) => navigate(`/tab/${id}`)} elements_qty={10} isLoading={false} />
                     </div>
                 </div>
 
                 {/* External Links */}
-                {artist.url && (
+                {/* {artist.url && (
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold mb-4">Enlaces</h2>
                         <a
@@ -113,7 +131,7 @@ const ArtistPage = () => {
                             Ver perfil oficial
                         </a>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     )
