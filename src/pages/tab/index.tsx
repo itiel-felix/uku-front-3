@@ -12,7 +12,7 @@ const TabPage = () => {
 
     useEffect(() => {
         const loadSong = async () => {
-            const responseSong = await songApi.getSongs(id ?? '', undefined)
+            const responseSong = await songApi.getSongs(id ?? '', { include: 'artist.fields()' })
             setSong(responseSong as Song)
         }
         loadSong()

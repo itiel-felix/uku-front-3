@@ -36,8 +36,8 @@ function App() {
             return {
                 ...song,
                 title: song.name,
-                subtitle: artists.find((artist) => artist.id == song.artist_id)?.name,
-                image_url: artists.find((artist) => artist.id == song.artist_id)?.image_url,
+                subtitle: artists.find((element) => element.id == song.artist_id)?.name,
+                image_url: artists.find((element) => element.id == song.artist_id)?.image_url,
                 button_text: 'PLAY',
                 url: `/tab/${song.id}`
             }
@@ -58,7 +58,7 @@ function App() {
                             items={formatSongs(songs, artists)}
                             onClick={(id) => navigate(`/tab/${id}`)}
                             sub_title={'artist'}
-                            onArtistClick={(artist_id: string) => navigate(`/artist/${artist_id}`)}
+                            onSubtitleClick={(song: Song) => navigate(`/artist/${song.artist_id}`)}
                             elements_qty={10}
                         />
                     </div>

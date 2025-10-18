@@ -16,7 +16,7 @@ function App() {
             <Route path="/" element={<FirstPage />} />
             <Route path="/tab" element={<Tab />} />
             <Route path="/tab/:id" element={<TabPage />} />
-            <Route path="/artist/:artistName" element={<ArtistPage />} />
+            <Route path="/artist/:id" element={<ArtistPage propArtist={undefined} />} />
           </Routes>
         </Layout>
       </div>

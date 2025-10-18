@@ -5,7 +5,7 @@ const List = ({ items,
     onSubtitleClick,
     isLoading,
     elements_qty,
-}: { items: ListElement[], onClick?: (id: string) => void, onSubtitleClick?: (id: string) => void, sub_title?: string | undefined, isLoading?: boolean, elements_qty?: number }) => {
+}: { items: ListElement[], onClick?: (id: string) => void, onSubtitleClick?: (item: ListElement) => void, sub_title?: string | undefined, isLoading?: boolean, elements_qty?: number }) => {
 
     const generateListItems = () => {
         if (isLoading) {
@@ -24,20 +24,21 @@ const List = ({ items,
             return listItems
         }
         return items.map((item, index) => {
+            const image_url = item?.image_url ?? 'https://img.daisyui.com/images/profile/demo/1@94.webp'
             return (
                 <li key={index} className={`list-row hover:bg-gray-100 ${onClick ? 'cursor-pointer' : ''}`} onClick={() => {
                     onClick?.(item.id ?? '')
                 }}>
                     <div className="text-4xl font-thin opacity-30 tabular-nums font-bold text-black" style={{ fontFamily: 'Arial' }}>{index + 1}</div>
                     <div>
-                        <img className="size-10 rounded-box" src="https://img.daisyui.com/images/profile/demo/1@94.webp" />
+                        <img className="size-10 rounded-box" src={image_url} />
                     </div>
                     <div className="list-col-grow text-black">
                         <div>{item.title}</div>
                         <div className="text-xs w-fit uppercase font-semibold opacity-60 text-black hover:cursor-pointer hover:text-blue-500"
                             onClick={(e) => {
                                 e.stopPropagation();
-                                onSubtitleClick?.(item.subtitle ?? '');
+                                onSubtitleClick?.(item);
                             }}>
                             {item.subtitle ?? ''}
                         </div>

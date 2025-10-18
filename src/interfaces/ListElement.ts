@@ -5,4 +5,5 @@ export interface ListElement {
     image_url: string | undefined,
     button_text: string | undefined,
     url: string | undefined,
+    [key: string]: unknown;
 }
