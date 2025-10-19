@@ -73,7 +73,7 @@ const ArtistPage = ({
     return (
         <div className="text-black min-h-screen animate-fade-in">
             {/* Hero Section */}
-            <div className="relative bg-gradient-to-br from-gray-900 to-gray-700 text-white">
+            <div className="relative bg-gradient-to-br from-gray-900 to-gray-700 text-white rounded-lg overflow-hidden">
                 <div className="absolute inset-0 bg-black opacity-40"></div>
                 <div className="relative px-6 py-16 md:px-12">
                     <div className="flex flex-col md:flex-row items-center md:items-end gap-8">
