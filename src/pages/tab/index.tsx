@@ -46,7 +46,7 @@ const TabPage = () => {
             <div className="w-full h-full flex flex-col sticky ">
                 <div>
                     <h1 className="text-4xl font-bold text-gray-800">{song?.name}</h1>
-                    <h2 className="text-2xl text-gray-600">{song?.artist}</h2>
+                    <h2 className="text-2xl text-gray-600">{song?.artist?.name}</h2>
                 </div>
                 <div>
                     <p className="text-sm text-gray-600">Tab submitted by: {song?.submitted_by}</p>

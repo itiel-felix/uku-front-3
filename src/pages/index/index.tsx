@@ -1,19 +1,25 @@
 
+import './index.css'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Song } from '../../interfaces/Song'
+import { ListElement } from '../../interfaces/ListElement'
 import { Artist } from '../../interfaces/Artist'
 import TodaysSong from './components/TodaysSong'
 import NewbiesSection from './components/NewbiesSection'
 import List from '../../general_components/List'
+import { Heart } from "lucide-react";
+import { Share } from "lucide-react";
 
-import './index.css'
+
 
 import { artist, song } from '../../services/api'
+import { useFavorites } from '../../hooks/useFavorites'
 
 
 function App() {
     const navigate = useNavigate()
+    const { favorites, getFavorites, addFavorite, removeFavorite } = useFavorites()
     const [songs, setSongs] = useState<Song[]>([])
     const [artists, setArtists] = useState<Artist[]>([])
     const [songsLoading, setSongsLoading] = useState<boolean>(false)
@@ -27,6 +33,7 @@ function App() {
             await artist.getArtists(undefined, undefined).then((artists) => {
                 setArtists(artists as Artist[])
             })
+            await getFavorites()
             setSongsLoading(false)
         }
         getElements()
@@ -44,6 +51,18 @@ function App() {
         })
         return formattedSongs
     }
+    const generateButtonArray = (element: ListElement) => {
+        const isFavorite = favorites.some((favorite) => favorite.song_id === element.id)
+        return (
+            <div className="flex flex-row gap-2 text-gray h-full items-center justify-center pr-5">
+                <Heart className="w-4 h-4 hover:fill-red-500 hover:text-red-500 text-gray-500 cursor-pointer"
+                    onClick={async () => isFavorite ? await removeFavorite(element.id as string) : await addFavorite(element.id as string)}
+                    style={{ fill: isFavorite ? 'red' : 'none', color: isFavorite ? 'red' : '' }}
+                />
+                <Share className="w-4 h-4 hover:text-green-500 text-gray-500 cursor-pointer" />
+            </div>
+        )
+    }
     return (
         <div className="w-full h-full flex flex-col gap-5 ">
             {<TodaysSong />}
@@ -58,21 +77,14 @@ function App() {
                             items={formatSongs(songs, artists)}
                             onClick={(id) => navigate(`/tab/${id}`)}
                             sub_title={'artist'}
-                            onSubtitleClick={(song: Song) => navigate(`/artist/${song.artist_id}`)}
+                            onSubtitleClick={(element: ListElement) => navigate(`/artist/${element.id}`)}
                             elements_qty={10}
+                            buttonsArray={generateButtonArray}
                         />
                     </div>
                 </div>
                 <div className="w-full h-full flex flex-col gap-10">
-                    <div className="text-5xl font-bold text-black">UPRISING SONGS</div>
-                    <List items={formatSongs(songs, artists)} />
-                </div>
-                <div className="w-full h-full flex flex-col gap-10">
-                    <div className="text-5xl font-bold text-black">UPRISING SONGS</div>
-                    <List items={formatSongs(songs, artists)} />
-                </div>
-                <div className="w-full h-full flex flex-col gap-10">
-                    <div className="text-5xl font-bold text-black">UPRISING SONGS</div>
+                    <div className="text-5xl font-bold text-black">MOST LIKED SONGS</div>
                     <List items={formatSongs(songs, artists)} />
                 </div>
             </div>

@@ -1,6 +1,10 @@
+import { useAuth } from "../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 const LeftSideBar = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) => {
+    const { isLoggedIn } = useAuth()
 
+    const navigate = useNavigate()
     return (
         <div className="w-full h-full flex flex-col bg-gray-800">
             <div className="w-full h-full flex flex-col">
@@ -17,6 +21,14 @@ const LeftSideBar = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) =>
                             <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>TOOLS</div>
                             <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>ABOUT</div>
                         </div>
+                        {
+                            isLoggedIn && (
+                                <div className="w-full flex flex-col flex-start">
+                                    <div className="header-button !justify-start text-xl " onClick={() => navigate('/user/profile')}>MY PROFILE</div>
+                                    <div className="header-button !justify-start text-sm" onClick={() => navigate('/user/favorites')}>FAVORITES</div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>

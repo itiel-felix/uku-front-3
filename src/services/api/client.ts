@@ -34,8 +34,11 @@ export async function apiClient<TResponse = unknown, Tbody = unknown, Tquery = u
     const fullUrl = BASE_URL + url + queryString
     const response = await fetch(fullUrl, {
         method: method,
-        body: JSON.stringify(body),
-        headers: headers
+        body: body ? JSON.stringify(body) : undefined,
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        }
     })
     return response.json()
 }
