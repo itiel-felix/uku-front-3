@@ -1,12 +1,13 @@
 
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Login from "./components/login"
 import { useAuth } from "../hooks/useAuth"
 const UpperBar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: boolean) => void }) => {
+    const navigate = useNavigate()
+    const { isLoggedIn, logout } = useAuth()
     const [search, setSearch] = useState("")
     const [loginModalOpen, setLoginModalOpen] = useState(false)
-    const { isLoggedIn, logout } = useAuth()
     const burgerMenu = () => {
         return (
             <div className="flex flex-row justify-start items-center hover:cursor-pointer md:hidden"
@@ -47,6 +48,7 @@ const UpperBar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: 
             return (
                 <button className="color-red-500 cursor-pointer" onClick={() => {
                     logout()
+                    navigate("/")
                 }}>LOGOUT</button>
             )
         }

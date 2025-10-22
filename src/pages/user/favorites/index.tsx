@@ -15,11 +15,15 @@ const Favorites = () => {
             if (actualFavorites.length > 0) {
                 const songIds = actualFavorites.map((favorite: Favorite) => favorite.song_id)
                 setIsLoading(true)
-                const songsResponse = await songApi.getSongs('', { id: songIds.join(',') }).then((songs) => {
-                    setSongs(songs as Song[])
-                    return songs as Song[]
-                })
-                const artists = songsResponse.map((song: Song) => song.artist as Artist)
+                const songsResponse = await songApi.getSongs('', { id: songIds.join(',') }) as Song[]
+                const songsObjects = songsResponse.reduce((acc: Record<string, Song>, song: Song) => {
+                    acc[song.id] = song
+                    return acc
+                }, {})
+                const reOrderedSongs = actualFavorites.map((favorite: Favorite) => songsObjects[favorite.song_id])
+                setSongs(reOrderedSongs)
+
+                const artists = reOrderedSongs.map((song: Song) => song.artist as Artist)
                 setArtists(artists)
             }
             else {
@@ -48,7 +52,7 @@ const Favorites = () => {
     return (
         <div className="w-full h-full flex flex-col gap-5">
             {songs.length > 0 || isLoading ?
-                <List items={formatSongs(songs)} isLoading={isLoading} elements_qty={10} /> :
+                <List items={formatSongs(songs)} isLoading={isLoading} elements_qty={10} showIndex={false} /> :
                 <div className="flex items-center justify-center h-96">
                     <div className="text-center">
                         <h1 className="text-2xl font-bold text-gray-800 mb-4">No favorites found</h1>

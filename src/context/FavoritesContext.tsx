@@ -1,5 +1,5 @@
 // src/context/FavoritesContext.tsx
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth"
 import { favorite } from "../services/api/favorite"
 import { Favorite } from "../interfaces/Favorite";
@@ -39,6 +39,9 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
         setFavorites(response as Favorite[])
         return response as Favorite[]
     }
+    useEffect(() => {
+        getFavorites();
+    }, []);
     return (
         <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, getFavorites }}>
             {children}

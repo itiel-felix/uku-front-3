@@ -3,7 +3,6 @@ import { register } from "../../services/api/user"
 import { useAuth } from "../../hooks/useAuth"
 const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
     const { login: loginService } = useAuth()
-    const [username, setUsername] = useState("felixitiel13@gmail.com")
     const [password, setPassword] = useState("123456")
     const [type, setType] = useState("login")
     const [confirmPassword, setConfirmPassword] = useState("123456")
@@ -21,7 +20,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
     const loginInfo = () => {
         return (
             <div className="flex flex-col gap-2">
-                {inputElement("text", "Username", username, (e) => setUsername(e.target.value))}
+                {inputElement("text", "Email", email, (e) => setEmail(e.target.value))}
                 {inputElement("password", "Password", password, (e) => setPassword(e.target.value))}
                 <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 rounded-md hover:bg-[var(--safron-mango-dark)]" onClick={handleLogin}>LOGIN</button>
                 <span className="justify-center text-center pt-2 text-sm text-gray-500">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={() => setType("register")}>Register</span></span>
@@ -33,7 +32,6 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         return (
             <div className={`flex flex-col gap-2`}>
                 {inputElement("text", "Email", email, (e) => setEmail(e.target.value))}
-                {inputElement("text", "Username", username, (e) => setUsername(e.target.value))}
                 {inputElement("password", "Password", password, (e) => setPassword(e.target.value))}
                 {inputElement("password", "Confirm Password", confirmPassword, (e) => setConfirmPassword(e.target.value))}
                 <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 rounded-md hover:bg-[var(--safron-mango-dark)]" onClick={handleRegister}>REGISTER</button>
@@ -49,7 +47,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         setIsLoading(true)
         try {
             // register the user
-            await register({ username, password, confirmPassword, email })
+            await register({ username: email, email, password, confirmPassword })
 
             // login the user
             await loginService(email, password)

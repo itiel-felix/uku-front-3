@@ -10,5 +10,8 @@ const register = async (body: unknown | undefined): Promise<{ user: User, access
     const response = await api.post(`/user/register`, { body })
     return response as { user: User, access_token: string, refresh_token: string }
 }
-
-export { login, register }
+const autoLogin = async (body: unknown | undefined): Promise<{ user: User, access_token: string, refresh_token: string }> => {
+    const response = await api.post(`/user/auto_login`, { body })
+    return response as { user: User, access_token: string, refresh_token: string }
+}
+export { login, register, autoLogin }
