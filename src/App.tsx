@@ -8,6 +8,7 @@ import ScrollToTop from './components/ScrollToTop'
 import { AuthProvider } from './context/AuthContext'
 import Favorites from './pages/user/favorites'
 import { FavoritesProvider } from './context/FavoritesContext'
+import SubmitPage from './pages/submit'
 
 function App() {
   return (
@@ -22,10 +23,10 @@ function App() {
                 <Route path="/tab" element={<Tab />} />
                 <Route path="/tab/:id" element={<TabPage />} />
                 <Route path="/artist/:id" element={<ArtistPage propArtist={undefined} />} />
-
                 <Route path="/user/favorites" element={
                   <Favorites />
                 } />
+                <Route path="/submit" element={<SubmitPage />} />
               </Routes>
             </Layout>
           </div>

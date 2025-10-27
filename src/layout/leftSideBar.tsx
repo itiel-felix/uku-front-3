@@ -12,20 +12,21 @@ const LeftSideBar = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) =>
                     <div className="h-full w-full flex flex-col flex-start">
 
                         <div className="w-full flex flex-col flex-start">
-                            <div className="header-button !justify-start text-xl " onClick={() => setIsOpen(false)}>TABS</div>
+                            <div className="header-button !pointer-events-none !justify-start text-xl " onClick={() => setIsOpen(false)}>TABS</div>
                             <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>GENRES</div>
                             <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>ARTISTS</div>
                         </div>
                         <div className="w-full flex flex-col flex-start">
-                            <div className="header-button !justify-start text-xl " onClick={() => setIsOpen(false)}>MORE</div>
+                            <div className="header-button !pointer-events-none !justify-start text-xl " onClick={() => setIsOpen(false)}>MORE</div>
                             <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>TOOLS</div>
                             <div className="header-button !justify-start text-sm" onClick={() => setIsOpen(false)}>ABOUT</div>
                         </div>
                         {
                             isLoggedIn && (
                                 <div className="w-full flex flex-col flex-start">
-                                    <div className="header-button !justify-start text-xl " onClick={() => navigate('/user/profile')}>MY PROFILE</div>
+                                    <div className="header-button !pointer-events-none  !justify-start text-xl " onClick={() => navigate('/user/profile')}>MY PROFILE</div>
                                     <div className="header-button !justify-start text-sm" onClick={() => navigate('/user/favorites')}>FAVORITES</div>
+                                    <div className="header-button !justify-start text-sm" onClick={() => navigate('/submit')}>SUBMIT</div>
                                 </div>
                             )
                         }
