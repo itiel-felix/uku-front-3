@@ -17,7 +17,7 @@ const LeftSideBar = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) =>
                             <div className="header-button !justify-start text-[10px] hover:font-bold" onClick={() => setIsOpen(false)}>Top 100 artists</div>
                         </div>
                         <div className="w-full flex flex-col flex-start">
-                            <div className="header-button font-bold !pointer-events-none !justify-start text-sm " onClick={() => setIsOpen(false)}>M </div>
+                            <div className="header-button font-bold !pointer-events-none !justify-start text-sm " onClick={() => setIsOpen(false)}>TOOLS</div>
                             <div className="header-button !justify-start text-[10px] hover:font-bold" onClick={() => setIsOpen(false)}>Chord library</div>
                             <div className="header-button !justify-start text-[10px] hover:font-bold" onClick={() => setIsOpen(false)}>Metronome</div>
                             <div className="header-button !justify-start text-[10px] hover:font-bold" onClick={() => setIsOpen(false)}>About</div>
