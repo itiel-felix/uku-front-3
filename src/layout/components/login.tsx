@@ -22,7 +22,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
             <div className="flex flex-col gap-2">
                 {inputElement("text", "Email", email, (e) => setEmail(e.target.value))}
                 {inputElement("password", "Password", password, (e) => setPassword(e.target.value))}
-                <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 rounded-md hover:bg-[var(--safron-mango-dark)]" onClick={handleLogin}>LOGIN</button>
+                <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 px-4 rounded-full hover:bg-[var(--safron-mango)]" onClick={handleLogin}>Sign in</button>
                 <span className="justify-center text-center pt-2 text-sm text-gray-500">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={() => setType("register")}>Register</span></span>
             </div>
         )

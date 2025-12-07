@@ -40,9 +40,11 @@ const UpperBar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: 
     const generateLoginButton = () => {
         if (!isLoggedIn) {
             return (
-                <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 rounded-md hover:bg-[var(--safron-mango-dark)]" onClick={() => {
-                    setLoginModalOpen(true)
-                }}>LOGIN</button>
+                <div className="text-xs">
+                    <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 px-4 rounded-full hover:bg-[var(--safron-mango)]" onClick={() => {
+                        setLoginModalOpen(true)
+                    }}>Sign in</button>
+                </div>
             )
         } else {
             return (
@@ -68,8 +70,8 @@ const UpperBar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: 
                     <span className="flex-1 flex flex-row justify-end items-center justify-center gap-2">
 
                         {generateLoginButton()}
-                        <div className=" bg-[var(--dark-slate-gray-dark)] text-white pl-4 p-2 rounded-full border border-gray-500">
-                            <input className="w-full" type="text" placeholder="Buscar" value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <div className=" bg-[var(--dark-slate-gray-dark)] text-white pl-4 p-1 rounded-full border border-gray-500">
+                            <input className="w-full text-xs" type="text" placeholder="Buscar" value={search} onChange={(e) => setSearch(e.target.value)} />
                         </div>
                     </span>
                 </div>

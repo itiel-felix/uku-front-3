@@ -6,7 +6,7 @@ const getTabs = async (id: string | undefined, query: Record<string, string> | u
     return response
 }
 
-const createTab = async (body: unknown | undefined) => {
+const submitTab = async (body: unknown | undefined) => {
     const response = await api.post(`/tab`, { body })
     return response
 }
@@ -19,6 +19,6 @@ const generatePreview = async (body: unknown | undefined) => {
 
 export const tab = {
     getTabs,
-    createTab,
+    submitTab,
     generatePreview
 }

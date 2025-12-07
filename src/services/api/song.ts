@@ -15,10 +15,15 @@ const createSong = async (body: unknown | undefined) => {
     return response
 }
 
+const getSongTabs = async (id: string | undefined, query: Record<string, string> | undefined) => {
+    const response = await api.get(`/song/${id ?? ''}/tabs`, { query })
+    return response
+}
 
 
 export const song = {
     getSongs,
+    getSongTabs,
     getPopularSongs,
     createSong
 }

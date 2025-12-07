@@ -33,7 +33,9 @@ function App() {
             await artist.getArtists(undefined, undefined).then((artists) => {
                 setArtists(artists as Artist[])
             })
-            await getFavorites()
+            if (favorites.length === 0) {
+                await getFavorites()
+            }
             setSongsLoading(false)
         }
         getElements()
@@ -71,7 +73,7 @@ function App() {
                 <div className="w-full h-full flex gap-10">
                     <div className="h-full flex-2 flex flex-col gap-2">
 
-                        <div className="text-5xl font-bold text-black">TOP SONGS</div>
+                        <div className="text-xl font-bold text-black">TOP SONGS</div>
                         <List
                             isLoading={songsLoading}
                             items={formatSongs(songs, artists)}
@@ -83,8 +85,8 @@ function App() {
                         />
                     </div>
                 </div>
-                <div className="w-full h-full flex flex-col gap-10">
-                    <div className="text-5xl font-bold text-black">MOST LIKED SONGS</div>
+                <div className="w-full h-full flex flex-col gap-2">
+                    <div className="text-xll font-bold text-black">MOST LIKED SONGS</div>
                     <List items={formatSongs(songs, artists)} />
                 </div>
             </div>

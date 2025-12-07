@@ -22,7 +22,7 @@ const NewbiesSection = () => {
     return (
         <div className="w-full  flex flex-col rounded-lg text-white gap-2  ">
             <div className="w-full flex flex-col justify-center ">
-                <div className="text-3xl font-bold text-black">FIRST STEPS!</div>
+                <div className="text-xl font-bold text-black">FIRST STEPS!</div>
             </div>
             <div className="w-full h-full flex flex-row gap-4 p-1 overflow-x-auto ">
                 {newbieCard("Newbie 1", "Newbie 1 description")}

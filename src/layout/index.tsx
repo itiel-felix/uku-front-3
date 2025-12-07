@@ -27,7 +27,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 <div className="h-full w-full flex flex-col">
                     <div className="flex-1 overflow-y-auto ">
-                        <div className="min-h-full flex flex-col p-5">
+                        <div className="min-h-full flex flex-col p-9">
                             <div className="flex-1">
                                 {children}
                             </div>

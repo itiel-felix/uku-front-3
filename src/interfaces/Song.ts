@@ -1,4 +1,5 @@
 import { Artist } from "./Artist";
+import { Tab } from "./Tab.ts";
 
 export interface Song {
     id: string,
@@ -7,6 +8,6 @@ export interface Song {
     artist_id: string,
     genre: string,
     rating: number,
-    tab: string,
+    tabs: Tab[],
     submitted_by: string,
 }
