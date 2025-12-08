@@ -3,11 +3,11 @@ import { Tab } from "./Tab.ts";
 
 export interface Song {
     id: string,
-    name: string,
+    title: string,
     artist: Artist,
-    artist_id: string,
+    artistId: string,
     genre: string,
     rating: number,
     tabs: Tab[],
-    submitted_by: string,
+    submittedBy: string,
 }

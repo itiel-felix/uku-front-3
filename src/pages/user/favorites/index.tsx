@@ -40,9 +40,9 @@ const Favorites = () => {
         const formattedSongs = songs.map((song) => {
             return {
                 ...song,
-                title: song.name,
-                subtitle: artists.find((artist) => artist.id == song.artist_id)?.name,
-                image_url: artists.find((artist) => artist.id == song.artist_id)?.image_url,
+                title: song.title,
+                subtitle: song.album.artist.name,
+                imageUrl: song.album.artist.imageUrl,
                 button_text: 'PLAY',
                 url: `/tab/${song.id}`
             }

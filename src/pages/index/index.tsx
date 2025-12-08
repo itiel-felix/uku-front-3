@@ -27,14 +27,14 @@ function App() {
     useEffect(() => {
         setSongsLoading(true)
         const getElements = async () => {
-            await song.getPopularSongs(undefined, { limit: '10' }).then((songs) => {
+            await song.getSongs(undefined, { limit: '10' }).then((songs) => {
                 setSongs(songs as Song[])
             })
             await artist.getArtists(undefined, undefined).then((artists) => {
                 setArtists(artists as Artist[])
             })
             if (favorites.length === 0) {
-                await getFavorites()
+                // await getFavorites()
             }
             setSongsLoading(false)
         }
@@ -44,9 +44,9 @@ function App() {
         const formattedSongs = songs.map((song) => {
             return {
                 ...song,
-                title: song.name,
-                subtitle: artists.find((element) => element.id == song.artist_id)?.name,
-                image_url: artists.find((element) => element.id == song.artist_id)?.image_url,
+                title: song.title,
+                subtitle: song.album?.artist?.name ?? '',
+                imageUrl: song.album?.artist?.imageUrl ?? '',
                 button_text: 'PLAY',
                 url: `/tab/${song.id}`
             }
@@ -79,7 +79,7 @@ function App() {
                             items={formatSongs(songs, artists)}
                             onClick={(id) => navigate(`/tab/${id}`)}
                             sub_title={'artist'}
-                            onSubtitleClick={(element: ListElement) => navigate(`/artist/${element.artist_id}`)}
+                            onSubtitleClick={(element: ListElement) => navigate(`/artist/${element.album.artist.id}`)}
                             elements_qty={10}
                             buttonsArray={generateButtonArray}
                         />

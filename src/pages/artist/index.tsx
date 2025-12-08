@@ -12,8 +12,10 @@ const ArtistPage = ({
     propArtist: Artist | undefined,
 }) => {
     const [artist, setArtist] = useState<Artist | undefined>(propArtist)
+    const [albums, setAlbums] = useState([])
+    const [songs, setSongs] = useState([]);
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const { id: artist_id } = useParams<{ id: string }>()
+    const { id: artistId } = useParams<{ id: string }>()
     // const [artistSongs, setArtistSongs] = useState<Song[]>([])
     const navigate = useNavigate()
 
@@ -22,9 +24,13 @@ const ArtistPage = ({
 
             setIsLoading(true)
             try {
-                const responseArtist = await artistApi.getArtistPage(artist_id ?? '')
+                const responseArtist = await artistApi.getArtistPage(artistId ?? '')
                 setIsLoading(false)
                 setArtist(responseArtist as Artist)
+                const allSongs = responseArtist.albums.reduce((acc, album) => {
+                    return [...acc, ...album.songs]
+                },[])
+                setSongs(allSongs);
             } catch (error) {
                 console.error(error)
                 setIsLoading(false)
@@ -61,9 +67,9 @@ const ArtistPage = ({
         const formattedSongs = songs.map((song) => {
             return {
                 ...song,
-                title: song.name,
+                title: song.title,
                 subtitle: artist?.name,
-                image_url: artist?.image_url,
+                imageUrl: artist?.imageUrl,
                 button_text: 'PLAY',
                 url: `/tab/${song.id}`
             }
@@ -80,7 +86,7 @@ const ArtistPage = ({
                         {/* Artist Image */}
                         <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white">
                             <img
-                                src={artist?.image_url}
+                                src={artist?.imageUrl}
                                 alt={artist?.name}
                                 className="w-full h-full object-cover"
                             />
@@ -96,14 +102,14 @@ const ArtistPage = ({
                                 </p>
                             </div>
                             <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-6">
-                                {artist?.genres.map((genre: string, index: number) => (
+                                {/* {artist?.genres.map((genre: string, index: number) => (
                                     <span
                                         key={index}
                                         className="px-3 py-1 bg-white bg-opacity-20 rounded-full text-sm font-medium text-gray-700 capitalize"
                                     >
                                         {genre}
                                     </span>
-                                ))}
+                                ))} */}
                             </div>
                             <div className="flex items-center justify-center md:justify-start gap-4">
                                 <div className="flex items-center gap-1">
@@ -123,7 +129,10 @@ const ArtistPage = ({
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold mb-6">Canciones Populares</h2>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                        <List items={formatSongs(artist?.songs ?? [])} onClick={(id) => navigate(`/tab/${id}`)} elements_qty={10} isLoading={artist?.songs == undefined} />
+                        <List items={formatSongs(songs ?? [])} 
+                        onClick={(id) => navigate(`/tab/${id}`)} 
+                        elements_qty={10} 
+                        isLoading={artist == null} />
                     </div>
                 </div>
                 {/* Albums Section */}
@@ -136,10 +145,10 @@ const ArtistPage = ({
                                 className="flex flex-col items-center justify-center max-w-45 max-h-55 bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer aspect-square"
                             >
                                 <div className="h-full w-full bg-gray-200 rounded mb-3 flex items-center justify-center aspect-square rounded-lg">
-                                    <img src={album.image_url} alt={album.name} className="w-full h-full object-cover rounded-lg" />
+                                    <img src={album.imageUrl} alt={album.title} className="w-full h-full object-cover rounded-lg" />
                                 </div>
                                 <div className="h-full w-full flex flex-col ">
-                                    <h3 className="font-semibold text-sm ">{album.name}</h3>
+                                    <h3 className="font-semibold text-sm ">{album.title}</h3>
                                     <p className="text-gray-600 text-xs">{album.release_date}</p>
                                 </div>
                             </div>
@@ -150,7 +159,7 @@ const ArtistPage = ({
 
 
                 {/* External Links */}
-                {artist?.spotify_id && (
+                {artist?.spotifyId && (
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold mb-4">Enlaces</h2>
                         <a

@@ -2,17 +2,17 @@ import { api } from "./client"
 
 
 const getTabs = async (id: string | undefined, query: Record<string, string> | undefined) => {
-    const response = await api.get(`/tab/${id ?? ''}`, { query })
+    const response = await api.get(`/tabs/${id ?? ''}`, { query })
     return response
 }
 
 const submitTab = async (body: unknown | undefined) => {
-    const response = await api.post(`/tab`, { body })
+    const response = await api.post(`/tabs`, { body })
     return response
 }
 
 const generatePreview = async (body: unknown | undefined) => {
-    const response = await api.post(`/tab/generate_preview`, { body })
+    const response = await api.post(`/tabs/generate_preview`, { body })
     return response
 }
 

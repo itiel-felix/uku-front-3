@@ -4,13 +4,13 @@ import { Song } from './Song';
 export interface Artist {
     id: string;
     name: string;
-    image_url: string;
+    imageUrl: string;
     rating: number;
     genres: string[];
     albums: Album[];
     songs: Song[];
     description: string;
-    spotify_id: string;
+    spotifyId: string;
 }
 
 // Función utilitaria para capitalizar géneros

@@ -23,11 +23,12 @@ const LeftSideBar = ({ setIsOpen }: { setIsOpen: (isOpen: boolean) => void }) =>
                             <div className="header-button !justify-start text-[10px] hover:font-bold" onClick={() => setIsOpen(false)}>About</div>
                         </div>
                         {
-                            isLoggedIn && (
+                            // isLoggedIn && 
+                            (
                                 <div className="w-full flex flex-col flex-start">
-                                    <div className="header-button !pointer-events-none  !justify-start text-sm " onClick={() => navigate('/user/profile')}>MY PROFILE</div>
-                                    <div className="header-button !justify-start text-xs hover:font-bold" onClick={() => navigate('/user/favorites')}>FAVORITES</div>
-                                    <div className="header-button !justify-start text-xs hover:font-bold" onClick={() => navigate('/submit')}>SUBMIT</div>
+                                    <div className="header-button font-bold !pointer-events-none !justify-start text-sm " onClick={() => navigate('/user/profile')}>MY PROFILE</div>
+                                    <div className="header-button !justify-start text-[10px] hover:font-bold" onClick={() => navigate('/user/favorites')}>Favorites</div>
+                                    <div className="header-button !justify-start text-[10px] hover:font-bold" onClick={() => navigate('/submit')}>Submit!</div>
                                 </div>
                             )
                         }

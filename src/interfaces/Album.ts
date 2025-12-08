@@ -1,8 +1,8 @@
 export interface Album {
     id: string,
-    name: string,
-    image_url: string,
+    title: string,
+    imageUrl: string,
     rating: number,
     release_date: string,
-    spotify_url: string,
+    spotifyUrl: string,
 }

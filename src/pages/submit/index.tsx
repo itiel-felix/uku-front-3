@@ -37,7 +37,7 @@ const SubmitPage = () => {
         if (artist) {
             setIsLoading('songs')
             const fetchSongs = async () => {
-                const response = await songApi.getSongs(undefined, { artist_id: artist.id })
+                const response = await songApi.getSongs(undefined, { artistId: artist.id })
                 setSongs(response as Song[])
                 setIsLoading(undefined)
             }
@@ -60,7 +60,7 @@ const SubmitPage = () => {
         }
         const submittedInfo = await tabApi.submitTab({
             tab: tab,
-            artist_id: artist?.id,
+            artistId: artist?.id,
             song_id: song?.id,
             type: type ?? 'chords',
             user_id: user?.id,
