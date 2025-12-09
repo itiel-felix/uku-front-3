@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { song as songApi } from '../../services/api'
 import { chords as chordsApi } from '../../services/api'
 import { useSearchParams } from 'react-router-dom';
-import {mapAllPreviewElements, generatePreview} from '../../pages/submit/utils.jsx'
+import {mapAllPreviewElements, generatePreview, getChords} from '../../pages/submit/utils.jsx'
 
 const SongPage = () => {
     const { id } = useParams<{ id: string }>()
@@ -35,12 +35,7 @@ const SongPage = () => {
             setPreview(tab?.content)
 
             
-            const getChords = (tab: string) => {
-                const regex = /\b([A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*(?:\/[A-G](?:#|b)?)?)\b/g;
-            
-                const chords = new Set([...tab.matchAll(regex)].map(match => match[1]));
-                return Array.from(chords);
-            }
+
             const usedChords = getChords(tab.content)
             const fetchedChords = await chordsApi.getChords(usedChords.join(','), undefined)
             setChords(fetchedChords as any[])

@@ -1,3 +1,9 @@
+const getChords = (tab) => {
+    const regex = /\b([A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*(?:\/[A-G](?:#|b)?)?)\b/g;
+
+    const chords = new Set([...tab.matchAll(regex)].map(match => match[1]));
+    return Array.from(chords);
+}
 
 const getChordsWithPositions = (tab) => {
     const regex = /\b([A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*(?:\/[A-G](?:#|b)?)?)\b/g;
@@ -37,7 +43,7 @@ const getChordsWithPositions = (tab) => {
             end: end,           // Posición final
             fullMatch: match[0], // Coincidencia completa
             line: lineNumber,    // Número de línea
-            spacesBefore: spacesFromLastChar < 4 ? spacesFromLastChar : spacesFromLineStart,  // Espacios desde el inicio del renglón
+            spacesBefore: spacesFromLastChar,  // Espacios desde el inicio del renglón
         };
     });
 }
@@ -154,5 +160,5 @@ const mapAllPreviewElements = (preview) => {
     return elementsArray
 }
 
-export { getChordComponent, getChordsWithPositions, generatePreview, mapAllPreviewElements }
+export {getChords, getChordComponent, getChordsWithPositions, generatePreview, mapAllPreviewElements }
 

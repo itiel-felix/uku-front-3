@@ -3,7 +3,8 @@ import { Song, Artist } from "../../interfaces"
 import { artist as artistApi } from "../../services/api"
 import { song as songApi } from "../../services/api"
 import { tab as tabApi } from "../../services/api"
-import { generatePreview } from "./utils"
+import { chords as chordsApi } from "../../services/api"
+import { generatePreview, getChords} from "./utils"
 
 // Hooks
 
@@ -65,15 +66,10 @@ const SubmitPage = () => {
         }
     }
     const handleGeneratePreview = async () => {
-        const chords = await tabApi.generatePreview({
-            tab: tab,
-        })
+        const usedChords = getChords(tab)
+        const fetchedChords = await chordsApi.getChords(usedChords.join(','), undefined)
 
-        const formattedChords = (chords as (any[])).map((chord: any) => {
-            return chord.uc.chord[0]
-        })
-
-        const preview = generatePreview(tab, formattedChords)
+        const preview = generatePreview(tab, fetchedChords)
         setPreview(preview)
     }
 
@@ -141,6 +137,8 @@ return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
         }
         return "w-full p-2 bg-green-500 text-white rounded-md hover:bg-green-600 cursor-pointer"
     }
+
+
     return (
         <div>
             <h1 className="text-5xl font-bold text-black">SUBMIT A TAB</h1>
@@ -178,8 +176,11 @@ return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
                         <legend className="label text-gray-500">Tab</legend>
                         {/* Use consolas font for text area */}
                         <textarea
-                            className="textarea flex w-full h-full text-gray-500 resize-none !font-mono text-xs white-space; pre-wrap;"
-                            style={{ tabSize: 4 }}
+                            className="textarea flex w-full h-full text-gray-500 resize-none !font-mono text-xs"
+                            style={{
+                                tabSize: 4,
+                                whiteSpace: "pre", // <— fuerza preservación real
+                            }}
                             placeholder="Write your tab here"
                             onKeyDown={(e) => {
                                 if (e.key === 'Tab') {
@@ -196,7 +197,8 @@ return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
                                 }
                             }}
                             value={tab}
-                            onChange={(e) => setTab(e.target.value)}
+                            onChange={(e) =>setTab(e.target.value)}
+
                         />
                     </fieldset>
 
