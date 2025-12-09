@@ -1,6 +1,6 @@
 export interface Tab {
     id: string,
-    song_id: string,
+    songId: string,
     type: string,
     tab: string,
     version: number,

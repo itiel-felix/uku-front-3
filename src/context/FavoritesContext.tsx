@@ -6,8 +6,8 @@ import { Favorite } from "../interfaces/Favorite";
 
 interface FavoritesContextType {
     favorites: Favorite[];
-    addFavorite: (song_id: string) => void;
-    removeFavorite: (song_id: string) => void;
+    addFavorite: (songId: string) => void;
+    removeFavorite: (songId: string) => void;
     getFavorites: () => Promise<Favorite[]>;
 }
 

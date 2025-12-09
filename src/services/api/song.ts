@@ -20,10 +20,15 @@ const getSongTabs = async (id: string | undefined, query: Record<string, string>
     return response
 }
 
+const getFavoriteSongs = async (userId: string | undefined, query: Record<string, string> | undefined) => {
+    const response = await api.get(`/songs/favorites/${userId}`, { query })
+    return response
+}
+
 
 export const song = {
     getSongs,
     getSongTabs,
-    // getPopularSongs,
+    getFavoriteSongs,
     createSong
 }

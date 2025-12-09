@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useFavorites } from "../../../hooks/useFavorites"
+import { useAuth } from "../../../hooks/useAuth"
 import List from "../../../general_components/List"
 import { Artist, Song, Favorite } from "../../../interfaces"
 import { song as songApi } from "../../../services/api/song"
 
 const Favorites = () => {
+    const { user } = useAuth()
     const { getFavorites } = useFavorites()
     const [songs, setSongs] = useState<Song[]>([])
     const [artists, setArtists] = useState<Artist[]>([])
@@ -13,14 +15,14 @@ const Favorites = () => {
         const fetchInfo = async () => {
             const actualFavorites = await getFavorites()
             if (actualFavorites.length > 0) {
-                const songIds = actualFavorites.map((favorite: Favorite) => favorite.song_id)
+                const songIds = actualFavorites.map((favorite: Favorite) => favorite.songId)
                 setIsLoading(true)
-                const songsResponse = await songApi.getSongs('', { id: songIds.join(',') }) as Song[]
+                const songsResponse = await songApi.getFavoriteSongs(user.id, undefined) as Song[]
                 const songsObjects = songsResponse.reduce((acc: Record<string, Song>, song: Song) => {
                     acc[song.id] = song
                     return acc
                 }, {})
-                const reOrderedSongs = actualFavorites.map((favorite: Favorite) => songsObjects[favorite.song_id])
+                const reOrderedSongs = actualFavorites.map((favorite: Favorite) => songsObjects[favorite.songId])
                 setSongs(reOrderedSongs)
 
                 const artists = reOrderedSongs.map((song: Song) => song.artist as Artist)
