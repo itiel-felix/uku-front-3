@@ -48,24 +48,21 @@ const SubmitPage = () => {
     const formatOptions = (elements: Song[] | Artist[] | { id: string, name: string, value: string }[]) => {
         return elements.map((element) => {
             return (
-                <option className="text-gray-500" value={element.id ?? element.value}>{element.name}</option>
+                <option className="text-gray-500" value={element.id ?? element.value}>{element.name ?? element.title}</option>
             )
         })
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         // Submitt version
         e.preventDefault()
-        if (!isLoggedIn) {
-            return
-        }
-        const submittedInfo = await tabApi.submitTab({
-            tab: tab,
-            artistId: artist?.id,
-            song_id: song?.id,
-            type: type ?? 'chords',
-            user_id: user?.id,
+        try{
+        await tabApi.submitTab({
+            content: tab,
+            songId: song?.id,
         })
-        console.log(submittedInfo)
+        } catch (e) {
+            console.log(e)
+        }
     }
     const handleGeneratePreview = async () => {
         const chords = await tabApi.generatePreview({
@@ -138,6 +135,12 @@ const SubmitPage = () => {
         }
         return elementsArray
     }
+    const getButtonClassName = (isDisabled) => {
+        if(isDisabled){
+return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
+        }
+        return "w-full p-2 bg-green-500 text-white rounded-md hover:bg-green-600 cursor-pointer"
+    }
     return (
         <div>
             <h1 className="text-5xl font-bold text-black">SUBMIT A TAB</h1>
@@ -209,7 +212,8 @@ const SubmitPage = () => {
                 <button type="button" className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer" onClick={async () => {
                     await handleGeneratePreview()
                 }}>Generate Preview</button>
-                <button type="submit" className="w-full p-2 bg-green-500 text-white rounded-md hover:bg-green-600 cursor-pointer">Submit</button>
+                <button disabled={!artist || !song} type="submit" 
+                className={getButtonClassName(artist == null || song == null)}>Submit</button>
             </form>
             {/* <div>
                 <h2 className="text-2xl font-bold text-gray-800">Preview</h2>

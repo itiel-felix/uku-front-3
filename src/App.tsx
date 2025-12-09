@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './layout'
 import FirstPage from './pages/index/index'
-import Tab from './pages/tab/index'
-import TabPage from './pages/tab/index'
+import Tab from './pages/song/index'
+import TabPage from './pages/song/index'
 import ArtistPage from './pages/artist'
 import ScrollToTop from './components/ScrollToTop'
 import { AuthProvider } from './context/AuthContext'
@@ -20,8 +20,8 @@ function App() {
             <Layout>
               <Routes>
                 <Route path="/" element={<FirstPage />} />
-                <Route path="/tab" element={<Tab />} />
-                <Route path="/tab/:id" element={<TabPage />} />
+                <Route path="/song" element={<Tab />} />
+                <Route path="/song/:id" element={<TabPage />} />
                 <Route path="/artist/:id" element={<ArtistPage propArtist={undefined} />} />
                 <Route path="/user/favorites" element={
                   <Favorites />

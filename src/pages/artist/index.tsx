@@ -71,7 +71,7 @@ const ArtistPage = ({
                 subtitle: artist?.name,
                 imageUrl: artist?.imageUrl,
                 button_text: 'PLAY',
-                url: `/tab/${song.id}`
+                url: `/song/${song.id}`
             }
         })
         return formattedSongs
@@ -130,7 +130,7 @@ const ArtistPage = ({
                     <h2 className="text-2xl font-bold mb-6">Canciones Populares</h2>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden">
                         <List items={formatSongs(songs ?? [])} 
-                        onClick={(id) => navigate(`/tab/${id}`)} 
+                        onClick={(id) => navigate(`/song/${id}`)} 
                         elements_qty={10} 
                         isLoading={artist == null} />
                     </div>

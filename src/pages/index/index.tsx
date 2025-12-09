@@ -48,7 +48,7 @@ function App() {
                 subtitle: song.album?.artist?.name ?? '',
                 imageUrl: song.album?.artist?.imageUrl ?? '',
                 button_text: 'PLAY',
-                url: `/tab/${song.id}`
+                url: `/song/${song.id}`
             }
         })
         return formattedSongs
@@ -77,7 +77,7 @@ function App() {
                         <List
                             isLoading={songsLoading}
                             items={formatSongs(songs, artists)}
-                            onClick={(id) => navigate(`/tab/${id}`)}
+                            onClick={(id) => navigate(`/song/${id}`)}
                             sub_title={'artist'}
                             onSubtitleClick={(element: ListElement) => navigate(`/artist/${element.album.artist.id}`)}
                             elements_qty={10}

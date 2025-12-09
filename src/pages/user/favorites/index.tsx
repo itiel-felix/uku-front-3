@@ -44,7 +44,7 @@ const Favorites = () => {
                 subtitle: song.album.artist.name,
                 imageUrl: song.album.artist.imageUrl,
                 button_text: 'PLAY',
-                url: `/tab/${song.id}`
+                url: `/song/${song.id}`
             }
         })
         return formattedSongs

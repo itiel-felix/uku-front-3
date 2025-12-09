@@ -6,6 +6,7 @@ export interface Song {
     title: string,
     artist: Artist,
     artistId: string,
+    albumId: string,
     genre: string,
     rating: number,
     tabs: Tab[],
