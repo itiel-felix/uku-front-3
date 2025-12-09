@@ -21,27 +21,32 @@ export const FavoritesContext = createContext<FavoritesContextType>({
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     const [favorites, setFavorites] = useState<Favorite[]>([]);
     const { user } = useAuth()
-    const addFavorite = async (song_id: string) => {
-        const response = await favorite.addFavorite({ song_id, user_id: user?.id })
+    const addFavorite = async (songId: string) => {
+        const response = await favorite.addFavorite({ songId, userId: user?.id })
         setFavorites(prev => [...prev, response as Favorite])
     };
-    const removeFavorite = async (song_id: string) => {
+    const removeFavorite = async (songId: string) => {
         try {
-            await favorite.removeFavorite({ song_id, user_id: user?.id as string })
-            setFavorites(prev => prev.filter(f => f.song_id !== song_id))
+            await favorite.removeFavorite({ songId, userId: user?.id })
+            setFavorites(prev => prev.filter(f => f.songId !== songId))
         } catch (error) {
             console.error(error)
         }
     };
 
     const getFavorites = async () => {
+        if(user){
         const response = await favorite.getFavorites(user?.id)
         setFavorites(response as Favorite[])
         return response as Favorite[]
+        }else{
+            setFavorites([])
+        }
+        return []
     }
     useEffect(() => {
         getFavorites();
-    }, []);
+    }, [user]);
     return (
         <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, getFavorites }}>
             {children}

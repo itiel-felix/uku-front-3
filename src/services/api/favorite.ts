@@ -1,19 +1,19 @@
 import { api } from "./client"
 
 
-const getFavorites = async (user_id: string | undefined) => {
-    const response = await api.get(`/favorites/get_favorites`, { query: { user_id } })
+const getFavorites = async (UserId: string | undefined) => {
+    const response = await api.get(`/likeSongs/${UserId}`, { query: { UserId } })
     return response
 }
 
 
 const addFavorite = async (body: unknown | undefined) => {
-    const response = await api.post(`/favorites/add_favorite`, { body })
+    const response = await api.post(`/likeSongs`, { body })
     return response
 }
 
-const removeFavorite = async (query: Record<string, string>) => {
-    const response = await api.delete(`/favorites/delete_favorite`, { query })
+const removeFavorite = async (body: Record<string, string>) => {
+    const response = await api.delete(`/likeSongs`, { body })
     return response
 }
 

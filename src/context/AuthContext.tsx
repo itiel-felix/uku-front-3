@@ -24,9 +24,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const login = async (email: string, password: string) => {
         setLoading(true);
         const response = await loginService({ email, password });
-        const { user, access_token, refresh_token } = response;
+        const { user, token, refresh_token } = response;
 
-        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("token", token);
         localStorage.setItem("refresh_token", refresh_token);
 
         // Aquí puedes guardar info básica del usuario
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // 🔹 Logout
     const logout = () => {
         setLoading(true);
-        localStorage.removeItem("access_token");
+        localStorage.removeItem("token");
         localStorage.removeItem("refresh_token");
         setUser(null);
         setLoading(false);
@@ -45,12 +45,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const autoLogin = async () => {
         setLoading(true);
-        const token = localStorage.getItem("refresh_token");
-        if (token) {
-            const response = await autoLoginService({ refresh_token: token });
-            const { user, access_token, refresh_token } = response as { user: User, access_token: string, refresh_token: string };
+        const localToken = localStorage.getItem("token");
+        if (localToken) {
+            const response = await autoLoginService({ token: localToken });
+            const { user, token, refresh_token } = response as { user: User, token: string, refresh_token: string };
             setUser(user as User);
-            localStorage.setItem("access_token", access_token);
+            localStorage.setItem("token", token);
             localStorage.setItem("refresh_token", refresh_token);
         }
         setLoading(false);

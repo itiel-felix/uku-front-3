@@ -54,7 +54,7 @@ function App() {
         return formattedSongs
     }
     const generateButtonArray = (element: ListElement) => {
-        const isFavorite = favorites.some((favorite) => favorite.song_id === element.id)
+        const isFavorite = favorites.some((favorite) => favorite.songId === element.id)
         return (
             <div className="flex flex-row gap-2 text-gray h-full items-center justify-center pr-5">
                 <Heart className="w-4 h-4 hover:fill-red-500 hover:text-red-500 text-gray-500 cursor-pointer"

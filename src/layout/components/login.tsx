@@ -47,7 +47,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         setIsLoading(true)
         try {
             // register the user
-            await register({ username: email, email, password, confirmPassword })
+            await register({ email, password})
 
             // login the user
             await loginService(email, password)

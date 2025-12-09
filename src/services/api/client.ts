@@ -39,7 +39,7 @@ export async function apiClient<TResponse = unknown, Tbody = unknown, Tquery = u
         method: method,
         body: body ? JSON.stringify(body) : undefined,
         headers: {
-            ...headers,
+            ...(headers ?? {}),
             'Content-Type': 'application/json'
         }
     })
