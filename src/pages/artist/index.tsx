@@ -27,8 +27,8 @@ const ArtistPage = ({
                 const responseArtist = await artistApi.getArtistPage(artistId ?? '')
                 setIsLoading(false)
                 setArtist(responseArtist as Artist)
-                const allSongs = responseArtist.albums.reduce((acc, album) => {
-                    return [...acc, ...album.songs]
+                const allSongs = (responseArtist as Artist).albums.reduce((acc, album) => {
+                    return [...acc, ...(album as Album).songs]
                 },[])
                 setSongs(allSongs);
             } catch (error) {
@@ -163,7 +163,7 @@ const ArtistPage = ({
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold mb-4">Enlaces</h2>
                         <a
-                            href={`https://open.spotify.com/artist/${artist?.spotify_id}`}
+                            href={`https://open.spotify.com/artist/${artist?.spotifyId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"

@@ -14,7 +14,7 @@ const SongPage = () => {
 
     // Buscar la canción por ID
     const [song, setSong] = useState<Song | undefined>(undefined)
-    const [version, setVersion] = useState('1')
+    const [version, setVersion] = useState<Number>(1)
     const [chords, setChords] = useState([])
     const [preview, setPreview] = useState<any>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -22,7 +22,9 @@ const SongPage = () => {
 
         const setParams = () => {
             const version = searchParams.get('version')
-            if(version) setVersion(version)
+            if(version) {
+                setVersion(Number(version))
+            }
         }
         const loadSong = async () => {
             setIsLoading(true)
@@ -31,7 +33,7 @@ const SongPage = () => {
 
             // const responsePreview = await songApi.getSongTabs(id ?? '', undefined)
             let tab;
-            if(version != null) tab = responseSong.tabs.find(tab => tab.version == version) 
+            if(version != null) tab = (responseSong as Song).tabs.find(tab => tab.version == version) 
             setPreview(tab?.content)
 
             
