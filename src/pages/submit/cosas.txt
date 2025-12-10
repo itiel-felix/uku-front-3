@@ -1,0 +1,49 @@
+const getChords = (tab: string) => {
+    const regex = /\b([A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*(?:\/[A-G](?:#|b)?)?)\b/g;
+
+    const chords = new Set([...tab.matchAll(regex)].map(match => match[1]));
+    return Array.from(chords);
+}
+
+const getChordsWithPositions = (tab: string) => {
+    const regex = /\b([A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*(?:\/[A-G](?:#|b)?)?)\b/g;
+
+    const matches = [...tab.matchAll(regex)];
+
+    return matches.map(match => ({
+        chord: match[1],
+        start: match.index,        // Posición inicial
+        end: match.index + match[0].length,        // Posición final
+        fullMatch: match[0]        // Coincidencia completa
+    }));
+}
+const getChordComponent = (chord: string, chords: string[]) => {
+    const foundChord = chords.find(c => c === chord)
+    if (foundChord) {
+        return (
+            <span className="chord-component text-blue-500">
+                {chord}
+            </span >
+        )
+    }
+    return null
+}
+
+const generatePreview = (tab: string, chords: string[]) => {
+    const chordsWithPositions = getChordsWithPositions(tab)
+    const formattedTab = []
+    let auxString = ''
+    for (let i = 0; i < tab.length; i++) {
+        const letter = tab[i]
+        if (chordsWithPositions.some(chord => chord.start === i)) {
+            formattedTab.push(auxString + '\n')
+            auxString = ''
+            formattedTab.push(getChordComponent(letter, chords))
+        }
+        auxString += letter
+    }
+    return tab
+}
+
+export { getChordComponent, getChordsWithPositions, generatePreview }
+

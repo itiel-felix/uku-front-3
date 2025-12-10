@@ -4,12 +4,12 @@ const NewbiesSection = () => {
 
     const newbieCard = (title: string, description: string) => {
         return (
-            <div className="card bg-neutral text-neutral-content w-full h-full ">
+            <div className="card bg-white text-neutral-content w-full h-full shadow-sm ">
                 <div className="card-body items-start text-start flex flex-col justify-end h-full">
                     <div className="w-full h-fit-content flex flex-col justify-end">
                         <div className="w-[100%] h-full flex flex-col items-start ">
-                            <h2 className="card-title text-sm font-bold max-w-full">{title}</h2>
-                            <p className="text-xs max-w-full">{description}</p>
+                            <h2 className="card-title text-sm font-bold max-w-full text-black">{title}</h2>
+                            <p className="text-xs max-w-full text-gray-700 ">{description}</p>
                         </div>
                     </div>
                     {/* <div className="card-actions justify-end">
@@ -20,11 +20,11 @@ const NewbiesSection = () => {
         )
     }
     return (
-        <div className="w-full h-full flex flex-col bg-[var(--safron-mango-light)]">
-            <div className="w-full h-full flex flex-col justify-center bg-red-500 p-5">
-                <div className="text-2xl font-bold text-black">Newbies Section</div>
+        <div className="w-full  flex flex-col rounded-lg text-white gap-2  ">
+            <div className="w-full flex flex-col justify-center ">
+                <div className="text-xl font-bold text-black">FIRST STEPS!</div>
             </div>
-            <div className="w-full h-full flex flex-row gap-4 p-5">
+            <div className="w-full h-full flex flex-row gap-4 p-1 overflow-x-auto ">
                 {newbieCard("Newbie 1", "Newbie 1 description")}
                 {newbieCard("Newbie 2", "Newbie 2 description")}
                 {newbieCard("Newbie 3", "Newbie 3 description")}
