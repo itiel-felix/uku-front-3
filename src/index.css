@@ -21,7 +21,7 @@
   --burnt-sienna-dark: #a34e34;
 
   --safron-mango: #f9c54e;
-  --safron-mango-light: #f5dfc1;
+  --safron-mango-light: #ffd5ae;
   --safron-mango-dark: #faa035;
 
   --dark-slate-gray: #2a2a2a;
@@ -33,6 +33,80 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
 
+}
+
+/* index.css */
+/* Light */
+/* @font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-Light.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+} */
+
+/* Regular */
+@font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Bold */
+/* @font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+} */
+
+/* Bold Italic */
+/* @font-face {
+  font-family: 'HeadingNow';
+  src: url('./assets/fonts/HeadingNow-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+} */
+
+body {
+  font-family: 'HeadingNow', sans-serif;
+}
+
+/* Aplicar Arial automáticamente a todos los números */
+* {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Configurar fuente híbrida: HeadingNow para texto, Arial para números */
+* {
+  font-family: 'HeadingNow', Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Forzar Arial en elementos que contienen números usando unicode-range */
+@font-face {
+  font-family: 'HeadingNowWithArialNumbers';
+  src: local('HeadingNow'), local('Arial');
+  unicode-range: U+0030-0039;
+  /* Solo números 0-9 */
+}
+
+* {
+  font-family: Arial, sans-serif;
 }
 
 .stamp-border {
@@ -54,4 +128,21 @@
   background-size:
     calc(var(--radius) * 3) calc(var(--radius) * 3),
     calc(100% - var(--radius) * 3) calc(100% - var(--radius) * 3);
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
 }

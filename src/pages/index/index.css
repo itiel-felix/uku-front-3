@@ -1,9 +1,12 @@
 .play-now-button {
     cursor: pointer;
-    width: 60%;
+    padding: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     height: 100%;
-    background-color: var(--safron-mango-dark);
-    color: white;
+    font-weight: 600;
+    background-color: white;
+    color: var(--safron-mango-dark);
     border-radius: 10px;
     text-align: center;
     display: flex;
@@ -14,4 +17,9 @@
 .play-now-button:hover {
     transform: scale(1.02);
     transition: transform 0.1s ease;
+}
+
+.todays-tab {
+    background-color: var(--safron-mango-dark);
+    /* color: var(--dark-slate-gray-dark); */
 }
