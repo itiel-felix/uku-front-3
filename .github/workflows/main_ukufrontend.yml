@@ -32,10 +32,10 @@ jobs:
           npm install --legacy-peer-deps --include=dev
 
       - name: Show env
-        run: echo "API = $VITE_API_URL"
+        run: echo "API = $VITE_API_URL "
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
-          
+
       - name: Build Vite app
         run: npm run build
         env:
