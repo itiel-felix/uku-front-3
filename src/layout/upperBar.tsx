@@ -62,17 +62,17 @@ const UpperBar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: 
                 <div className="w-full flex flex-row gap-4 justify-center">
                     {burgerMenu()}
                     <span className="flex flex-row items-center justify-center ">
-                        <Link to="/" className="aspect-square rounded-full border border-gray-500 h-full flex items-center justify-center text-white text-xs font-bold hover:bg-gray-600 transition-colors">
-                            UKUweb
+                        <Link to="/" className="aspect-square rounded-full border border-gray-500 h-full flex items-center justify-center text-white text-xs font-bold hover:bg-gray-600 transition-colors p-1">
+                            UkuHouse
                         </Link>
                     </span>
 
                     <span className="flex-1 flex flex-row justify-end items-center justify-center gap-2">
 
                         {generateLoginButton()}
-                        <div className=" bg-[var(--dark-slate-gray-dark)] text-white pl-4 p-1 rounded-full border border-gray-500">
+                        {/* <div className=" bg-[var(--dark-slate-gray-dark)] text-white pl-4 p-1 rounded-full border border-gray-500">
                             <input className="w-full text-xs" type="text" placeholder="Buscar" value={search} onChange={(e) => setSearch(e.target.value)} />
-                        </div>
+                        </div> */}
                     </span>
                 </div>
             </div>
