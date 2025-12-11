@@ -33,20 +33,23 @@ export async function apiClient<TResponse = unknown, Tbody = unknown, Tquery = u
     const queryString = query ? '?' + buildQueryString(query as Record<string, string>) : ''
     const fullUrl = BASE_URL + url + queryString
     console.log(`Fetching to  ${fullUrl}`)
-    let response;
     try{
-    response = await fetch(fullUrl, {
-        method: method,
-        body: body ? JSON.stringify(body) : undefined,
-        headers: {
-            ...(headers ?? {}),
-            'Content-Type': 'application/json'
-        }
-    })
-    }catch (e){
+        let response;
+        response = await fetch(fullUrl, {
+            method: method,
+            body: body ? JSON.stringify(body) : undefined,
+            headers: {
+                ...(headers ?? {}),
+                'Content-Type': 'application/json'
+            }
+        })
+        const jsonResponse = await response.json()
+        if(jsonResponse.error) throw jsonResponse
+        return jsonResponse
+    }catch(e){
         console.log(e)
+        throw e
     }
-    return response.json()
 }
 
 export const api = {
