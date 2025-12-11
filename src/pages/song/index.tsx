@@ -35,7 +35,7 @@ const SongPage = () => {
             let tab;
                 tab = (responseSong as Song).tabs.find(tab => tab.version == version) 
                 
-            if(tab.content != null) {
+            if(tab?.content != null) {
                 setPreview(tab?.content)
                 const usedChords = getChords(tab.content)
                 const fetchedChords = await chordsApi.getChords(usedChords.join(','), undefined)
@@ -68,8 +68,8 @@ const SongPage = () => {
             return  (
             <div className="flex items-center justify-center h-96">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-4">No favorites found</h1>
-                    <p className="text-gray-600">You don't have any favorites yet.</p>
+                    <h1 className="text-2xl font-bold text-gray-800 mb-4">No tabs found</h1>
+                    <p className="text-gray-600">Submit a tab for this song!</p>
                 </div>
             </div>
             )
