@@ -23,15 +23,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // 🔹 Login
     const login = async (email: string, password: string) => {
         setLoading(true);
-        const response = await loginService({ email, password });
-        const { user, token, refresh_token } = response;
+        try {
+            const response = await loginService({ email, password });
+            const { user, token, refresh_token } = response;
 
-        localStorage.setItem("token", token);
-        localStorage.setItem("refresh_token", refresh_token);
 
-        // Aquí puedes guardar info básica del usuario
-        setUser(user);
-        setLoading(false);
+            localStorage.setItem("token", token);
+            localStorage.setItem("refresh_token", refresh_token);
+
+            // Aquí puedes guardar info básica del usuario
+            setUser(user);
+        } catch (e) {
+            throw e
+        } finally {
+            setLoading(false)
+        }
     };
 
     // 🔹 Logout
@@ -63,7 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <AuthContext.Provider value={{ user, isLoggedIn, login, logout, loading }}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 };
