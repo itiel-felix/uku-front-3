@@ -15,6 +15,7 @@ import { Share } from "lucide-react";
 
 import { artist, song } from '../../services/api'
 import { useFavorites } from '../../hooks/useFavorites'
+import { Album } from '../../interfaces'
 
 
 function App() {
@@ -79,7 +80,7 @@ function App() {
                             items={formatSongs(songs, artists)}
                             onClick={(id) => navigate(`/song/${id}`)}
                             sub_title={'artist'}
-                            onSubtitleClick={(element: ListElement) => navigate(`/artist/${element.album.artist.id}`)}
+                            onSubtitleClick={(element: ListElement) => navigate(`/artist/${(element.album as Album).artist.id}`)}
                             elements_qty={10}
                             buttonsArray={generateButtonArray}
                         />

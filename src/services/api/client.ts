@@ -1,5 +1,5 @@
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
+const BASE_URL = import.meta.env.VITE_API_URL
 /**
  * Options for the API client
  * @param Body - The body of the request
