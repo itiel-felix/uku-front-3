@@ -13,10 +13,19 @@
     padding-left: 1rem;
 }
 
+.header-button.disabled{
+    color: gray;
+    pointer-events: none;
+}
+
 .header-button:hover {
     background-color: var(--dark-slate-gray-light);
     color: var(--safron-mango-dark);
     /* border-radius: 80px; */
+}
+
+.header-button.disabled:hover {
+    color: gray
 }
 
 /* Sidebar animation styles */

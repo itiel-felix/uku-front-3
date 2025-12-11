@@ -69,7 +69,7 @@ function App() {
     return (
         <div className="w-full h-full flex flex-col gap-5 ">
             {<TodaysSong />}
-            <NewbiesSection />
+            {/* <NewbiesSection /> */}
             <div className="w-full flex flex-col gap-10">
                 <div className="w-full h-full flex gap-10">
                     <div className="h-full flex-2 flex flex-col gap-2">
@@ -86,10 +86,10 @@ function App() {
                         />
                     </div>
                 </div>
-                <div className="w-full h-full flex flex-col gap-2">
+                {/* <div className="w-full h-full flex flex-col gap-2">
                     <div className="text-xll font-bold text-black">MOST LIKED SONGS</div>
                     <List items={formatSongs(songs, artists)} />
-                </div>
+                </div> */}
             </div>
         </div>
 
