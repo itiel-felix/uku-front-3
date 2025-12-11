@@ -53,8 +53,10 @@ const Favorites = () => {
     }
     return (
         <div className="w-full h-full flex flex-col gap-5">
-            {songs.length > 0 || isLoading ?
-                <List items={formatSongs(songs)} isLoading={isLoading} elements_qty={10} showIndex={false} /> :
+            {songs.length > 0 || isLoading 
+                ?
+                <List items={formatSongs(songs)} isLoading={isLoading} elements_qty={10} showIndex={false} /> 
+                :
                 <div className="flex items-center justify-center h-96">
                     <div className="text-center">
                         <h1 className="text-2xl font-bold text-gray-800 mb-4">No favorites found</h1>

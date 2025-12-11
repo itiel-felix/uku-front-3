@@ -33,14 +33,14 @@ const SongPage = () => {
 
             // const responsePreview = await songApi.getSongTabs(id ?? '', undefined)
             let tab;
-            if(version != null) tab = (responseSong as Song).tabs.find(tab => tab.version == version) 
-            setPreview(tab?.content)
-
-            
-
-            const usedChords = getChords(tab.content)
-            const fetchedChords = await chordsApi.getChords(usedChords.join(','), undefined)
-            setChords(fetchedChords as any[])
+                tab = (responseSong as Song).tabs.find(tab => tab.version == version) 
+                
+            if(tab.content != null) {
+                setPreview(tab?.content)
+                const usedChords = getChords(tab.content)
+                const fetchedChords = await chordsApi.getChords(usedChords.join(','), undefined)
+                setChords(fetchedChords as any[])
+            }
             setIsLoading(false)
         }
         loadSong()
@@ -61,6 +61,44 @@ const SongPage = () => {
                 </button>
             </div>
         )
+    }
+
+    const displayContentAfterLoading = () => {
+        if(preview == null){
+            return  (
+            <div className="flex items-center justify-center h-96">
+                <div className="text-center">
+                    <h1 className="text-2xl font-bold text-gray-800 mb-4">No favorites found</h1>
+                    <p className="text-gray-600">You don't have any favorites yet.</p>
+                </div>
+            </div>
+            )
+        }else{
+            return (
+                    <div className='flex'>
+                        <div
+                            className="w-full rounded-lg text-gray-900 text-[10px] text-left justify-start"
+                            style={{
+                                fontFamily: 'Consolas, monospace',
+                                whiteSpace: 'pre'
+                            }}
+                        >
+                            {chords?.length > 0 && mapAllPreviewElements(generatePreview(preview,chords))}
+                        </div>
+                        
+                        <div className='w-1/3'>
+                            {
+                                song.tabs.length > 0 &&
+                                <div className='flex flex-col'>
+                                    {...song.tabs.map(tab => {
+                                        return <a className='text-black hover:text-orange-500' href={`/song/${song.id}?version=${tab.version}`}>{`Version ${tab.version}`}</a>
+                                    })}
+                                </div>
+                            }
+                        </div>
+                    </div>
+            )
+        }
     }
 
     return (
@@ -105,30 +143,9 @@ const SongPage = () => {
                         >
                             <span className="loading loading-spinner loading-xl text-orange-500"></span>
                         </div>
-                    ) : (
-                        <div className='flex'>
-                            <div
-                                className="w-full rounded-lg text-gray-900 text-[10px] text-left justify-start"
-                                style={{
-                                    fontFamily: 'Consolas, monospace',
-                                    whiteSpace: 'pre'
-                                }}
-                            >
-                                {chords?.length > 0 && mapAllPreviewElements(generatePreview(preview,chords))}
-                            </div>
-                            
-                            <div className='w-1/3'>
-                                {
-                                    song.tabs.length > 0 &&
-                                    <div className='flex flex-col'>
-                                        {...song.tabs.map(tab => {
-                                            return <a className='text-black hover:text-orange-500' href={`/song/${song.id}?version=${tab.version}`}>{`Version ${tab.version}`}</a>
-                                        })}
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    )}
+                    ) : 
+                    displayContentAfterLoading()
+                    }
 
         </div >
 
