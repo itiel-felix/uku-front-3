@@ -45,9 +45,9 @@ function App() {
         const formattedSongs = songs.map((song) => {
             return {
                 ...song,
-                title: song.title,
+                title: song.name,
                 subtitle: song.album?.artist?.name ?? '',
-                imageUrl: song.album?.artist?.imageUrl ?? '',
+                imageUrl: song.album?.artist?.image_url ?? '',
                 button_text: 'PLAY',
                 url: `/song/${song.id}`
             }
