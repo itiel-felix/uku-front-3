@@ -1,7 +1,7 @@
 {
   "name": "uku-front-3",
   "private": true,
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "scripts": {
     "dev": "vite",

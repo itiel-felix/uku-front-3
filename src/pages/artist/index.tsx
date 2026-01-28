@@ -127,7 +127,7 @@ const ArtistPage = ({
 
                 {/* Popular Songs */}
                 <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-6">Canciones Populares</h2>
+                    <h2 className="text-2xl font-bold mb-6">Popular songs</h2>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden">
                         <List items={formatSongs(songs ?? [])} 
                         onClick={(id) => navigate(`/song/${id}`)} 
@@ -137,7 +137,7 @@ const ArtistPage = ({
                 </div>
                 {/* Albums Section */}
                 <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-6">Álbumes</h2>
+                    <h2 className="text-2xl font-bold mb-6">Albums</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {artist?.albums.map((album: Album, index) => (
                             <div
@@ -161,7 +161,7 @@ const ArtistPage = ({
                 {/* External Links */}
                 {artist?.spotifyId && (
                     <div className="mb-8">
-                        <h2 className="text-2xl font-bold mb-4">Enlaces</h2>
+                        <h2 className="text-2xl font-bold mb-4">Links</h2>
                         <a
                             href={`https://open.spotify.com/artist/${artist?.spotifyId}`}
                             target="_blank"
@@ -171,7 +171,7 @@ const ArtistPage = ({
                             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
-                            Ver perfil oficial
+                            Go to official Spotify page
                         </a>
                     </div>
                 )}

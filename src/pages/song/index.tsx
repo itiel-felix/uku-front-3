@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { song as songApi } from '../../services/api'
 import { chords as chordsApi } from '../../services/api'
 import { useSearchParams } from 'react-router-dom';
-import {mapAllPreviewElements, generatePreview, getChords} from '../../pages/submit/utils.jsx'
+import { mapAllPreviewElements, generatePreview, getChords } from '../../pages/submit/utils.jsx'
 
 const SongPage = () => {
     const { id } = useParams<{ id: string }>()
@@ -14,7 +14,7 @@ const SongPage = () => {
 
     // Buscar la canción por ID
     const [song, setSong] = useState<Song | undefined>(undefined)
-    const [version, setVersion] = useState<Number>(1)
+    const [version, setVersion] = useState<number>(1)
     const [chords, setChords] = useState([])
     const [preview, setPreview] = useState<any>(null)
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -22,24 +22,23 @@ const SongPage = () => {
 
         const setParams = () => {
             const version = searchParams.get('version')
-            if(version) {
+            if (version) {
                 setVersion(Number(version))
             }
         }
         const loadSong = async () => {
             setIsLoading(true)
-            const responseSong = await songApi.getSongs(id ?? '', undefined)
+            const responseSong = await songApi.getSongDetails(id ?? '', undefined)
             setSong(responseSong as Song)
 
             // const responsePreview = await songApi.getSongTabs(id ?? '', undefined)
-            let tab;
-                tab = (responseSong as Song).tabs.find(tab => tab.version == version) 
-                
-            if(tab?.content != null) {
-                setPreview(tab?.content)
-                const usedChords = getChords(tab.content)
+            const tab = (responseSong as Song).tabs.find(tab => tab.version == version)
+            const tabContent = tab?.tab
+            if (tabContent != null) {
+                setPreview(tabContent)
+                const usedChords = getChords(tabContent)
                 const fetchedChords = await chordsApi.getChords(usedChords.join(','), undefined)
-                setChords(fetchedChords as any[])
+                setChords(fetchedChords as string[])
             }
             setIsLoading(false)
         }
@@ -64,39 +63,39 @@ const SongPage = () => {
     }
 
     const displayContentAfterLoading = () => {
-        if(preview == null){
-            return  (
-            <div className="flex items-center justify-center h-96">
-                <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-4">No tabs found</h1>
-                    <p className="text-gray-600">Submit a tab for this song!</p>
-                </div>
-            </div>
-            )
-        }else{
+        if (preview == null) {
             return (
-                    <div className='flex'>
-                        <div
-                            className="w-full rounded-lg text-gray-900 text-[10px] text-left justify-start"
-                            style={{
-                                fontFamily: 'Consolas, monospace',
-                                whiteSpace: 'pre'
-                            }}
-                        >
-                            {chords?.length > 0 && mapAllPreviewElements(generatePreview(preview,chords))}
-                        </div>
-                        
-                        <div className='w-1/3'>
-                            {
-                                song.tabs.length > 0 &&
-                                <div className='flex flex-col'>
-                                    {...song.tabs.map(tab => {
-                                        return <a className='text-black hover:text-orange-500' href={`/song/${song.id}?version=${tab.version}`}>{`Version ${tab.version}`}</a>
-                                    })}
-                                </div>
-                            }
-                        </div>
+                <div className="flex items-center justify-center h-96">
+                    <div className="text-center">
+                        <h1 className="text-2xl font-bold text-gray-800 mb-4">No tabs found</h1>
+                        <p className="text-gray-600">Submit a tab for this song!</p>
                     </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className='flex'>
+                    <div
+                        className="w-full rounded-lg text-gray-900 text-[10px] text-left justify-start"
+                        style={{
+                            fontFamily: 'Consolas, monospace',
+                            whiteSpace: 'pre'
+                        }}
+                    >
+                        {chords?.length > 0 && mapAllPreviewElements(generatePreview(preview, chords))}
+                    </div>
+
+                    <div className='w-1/3'>
+                        {
+                            song.tabs.length > 0 &&
+                            <div className='flex flex-col'>
+                                {...song.tabs.map(tab => {
+                                    return <a className='text-black hover:text-orange-500' href={`/song/${song.id}?version=${tab.version}`}>{`Version ${tab.version}`}</a>
+                                })}
+                            </div>
+                        }
+                    </div>
+                </div>
             )
         }
     }
@@ -130,22 +129,22 @@ const SongPage = () => {
             </div>
 
 
-                    {/* Tab Area */}
-                    {isLoading ? (
-                        <div
-                            className="w-full h-full flex items-center justify-center absolute inset-0"
-                            style={{
-                                opacity: !isLoading ? 0 : 1,
-                                transition: 'opacity 0.5s ease-out',
-                                pointerEvents: !isLoading ? 'none' : 'auto',
-                                zIndex: 10
-                            }}
-                        >
-                            <span className="loading loading-spinner loading-xl text-orange-500"></span>
-                        </div>
-                    ) : 
-                    displayContentAfterLoading()
-                    }
+            {/* Tab Area */}
+            {isLoading ? (
+                <div
+                    className="w-full h-full flex items-center justify-center absolute inset-0"
+                    style={{
+                        opacity: !isLoading ? 0 : 1,
+                        transition: 'opacity 0.5s ease-out',
+                        pointerEvents: !isLoading ? 'none' : 'auto',
+                        zIndex: 10
+                    }}
+                >
+                    <span className="loading loading-spinner loading-xl text-orange-500"></span>
+                </div>
+            ) :
+                displayContentAfterLoading()
+            }
 
         </div >
 

@@ -57,7 +57,7 @@ const getChordComponent = (foundChord, chords) => {
         return (
             <div className={`tooltip !font-mono !text-xs`}>
                 <div className="tooltip-content">
-                    <img className="w-15" src={chordElement.diagramMini} />
+                    <img className="w-15" src={chordElement.chord_diag_mini} />
                 </div>
                 {foundChord.fullMatch}
             </div>
@@ -84,8 +84,8 @@ const getChordComponent = (foundChord, chords) => {
 const searchChordElement = (chords, fullMatch) => {
     // Look for ChordIndex
     let chordInfo;
-    for(let chord of chords){
-        if(chord[0].name == fullMatch) chordInfo = [...chord]
+    for (let chord of chords) {
+        if (chord[0].chord_name == fullMatch) chordInfo = [...chord]
     }
     return chordInfo[0]
 }
@@ -160,5 +160,5 @@ const mapAllPreviewElements = (preview) => {
     return elementsArray
 }
 
-export {getChords, getChordComponent, getChordsWithPositions, generatePreview, mapAllPreviewElements }
+export { getChords, getChordComponent, getChordsWithPositions, generatePreview, mapAllPreviewElements }
 
