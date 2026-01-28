@@ -2,7 +2,11 @@ import { api } from "./client"
 
 
 const getSongs = async (id: string | undefined, query: Record<string, string> | undefined) => {
-    const response = await api.get(`/songs${id ? '/'+id : ''}`, { query })
+    const response = await api.get(`/songs${id ? '/' + id : ''}`, { query })
+    return response
+}
+const getSongDetails = async (id: string | undefined, query: Record<string, string> | undefined) => {
+    const response = await api.get(`/songs/${id}/details`, { query })
     return response
 }
 // const getPopularSongs = async (id: string | undefined, query: Record<string, string> | undefined) => {
@@ -28,6 +32,7 @@ const getFavoriteSongs = async (userId: string | undefined, query: Record<string
 
 export const song = {
     getSongs,
+    getSongDetails,
     getSongTabs,
     getFavoriteSongs,
     createSong
