@@ -24,8 +24,8 @@ const getSongTabs = async (id: string | undefined, query: Record<string, string>
     return response
 }
 
-const getFavoriteSongs = async (userId: string | undefined, query: Record<string, string> | undefined) => {
-    const response = await api.get(`/songs/favorites/${userId}`, { query })
+const getFavoriteSongs = async (user_id: string | undefined, query: Record<string, string> | undefined) => {
+    const response = await api.get(`/favorites/get_favorite_songs`, { query })
     return response
 }
 

@@ -4,7 +4,7 @@ import { Song } from './Song';
 export interface Artist {
     id: string;
     name: string;
-    imageUrl: string;
+    image_url: string;
     rating: number;
     genres: string[];
     albums: Album[];

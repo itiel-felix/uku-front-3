@@ -4,7 +4,7 @@ import { artist as artistApi } from "../../services/api"
 import { song as songApi } from "../../services/api"
 import { tab as tabApi } from "../../services/api"
 import { chords as chordsApi } from "../../services/api"
-import { generatePreview, getChords} from "./utils"
+import { generatePreview, getChords } from "./utils"
 
 // Hooks
 
@@ -49,18 +49,18 @@ const SubmitPage = () => {
     const formatOptions = (elements: Song[] | Artist[] | { id: string, name: string, value: string }[]) => {
         return elements.map((element) => {
             return (
-                <option className="text-gray-500" value={element.id ?? element.value}>{element.name ?? element.title}</option>
+                <option className="text-gray-500" value={element.id ?? element.value}>{element.name}</option>
             )
         })
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         // Submitt version
         e.preventDefault()
-        try{
-        await tabApi.submitTab({
-            content: tab,
-            songId: song?.id,
-        })
+        try {
+            await tabApi.submitTab({
+                content: tab,
+                song_id: song?.id,
+            })
         } catch (e) {
             console.log(e)
         }
@@ -132,8 +132,8 @@ const SubmitPage = () => {
         return elementsArray
     }
     const getButtonClassName = (isDisabled) => {
-        if(isDisabled){
-return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
+        if (isDisabled) {
+            return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
         }
         return "w-full p-2 bg-green-500 text-white rounded-md hover:bg-green-600 cursor-pointer"
     }
@@ -197,7 +197,7 @@ return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
                                 }
                             }}
                             value={tab}
-                            onChange={(e) =>setTab(e.target.value)}
+                            onChange={(e) => setTab(e.target.value)}
 
                         />
                     </fieldset>
@@ -214,8 +214,8 @@ return "w-full p-2 bg-green-100 text-white rounded-md cursor-not-allowed "
                 <button type="button" className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer" onClick={async () => {
                     await handleGeneratePreview()
                 }}>Generate Preview</button>
-                <button disabled={!artist || !song} type="submit" 
-                className={getButtonClassName(artist == null || song == null)}>Submit</button>
+                <button disabled={!artist || !song} type="submit"
+                    className={getButtonClassName(artist == null || song == null)}>Submit</button>
             </form>
             {/* <div>
                 <h2 className="text-2xl font-bold text-gray-800">Preview</h2>

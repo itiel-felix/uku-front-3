@@ -42,9 +42,10 @@ const SongPage = () => {
             }
             setIsLoading(false)
         }
+        console.log('Updated version', version)
         loadSong()
         setParams()
-    }, [id, version])
+    }, [id, version, searchParams])
 
 
     if (!song && !isLoading) {
@@ -88,9 +89,12 @@ const SongPage = () => {
                     <div className='w-1/3'>
                         {
                             song.tabs.length > 0 &&
-                            <div className='flex flex-col'>
+                            <div className='flex flex-col' style={{ fontFamily: 'Consolas, monospace' }}>
                                 {...song.tabs.map(tab => {
-                                    return <a className='text-black hover:text-orange-500' href={`/song/${song.id}?version=${tab.version}`}>{`Version ${tab.version}`}</a>
+                                    return <span className='text-black hover:text-orange-500 hover:cursor-pointer' onClick={() => {
+                                        console.log(tab.version)
+                                        navigate(`/song/${song.id}?version=${tab.version}`)
+                                    }}>{`Version ${tab.version}`}</span>
                                 })}
                             </div>
                         }
@@ -112,7 +116,7 @@ const SongPage = () => {
             {/* Header */}
             <div className="w-full h-full flex flex-col sticky ">
                 <div>
-                    <h1 className="text-4xl font-bold text-gray-800">{song?.title}</h1>
+                    <h1 className="text-4xl font-bold text-gray-800">{song?.name}</h1>
                     <h2 className="text-2xl text-gray-600">{song?.album?.artist?.name}</h2>
                 </div>
                 <div>

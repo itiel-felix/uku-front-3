@@ -13,7 +13,7 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
 
     const inputElement = (type: string, placeholder: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void) => {
         let dynamicClass = "text-black border border-gray-300 p-2 rounded-md"
-        if(hasWrongPassowrd) dynamicClass+=" border-red-500"
+        if (hasWrongPassowrd) dynamicClass += " border-red-500"
         return (
             <div className="flex flex-col">
                 <label className="text-sm text-gray-500">{placeholder}</label>
@@ -33,12 +33,12 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
                 {inputElement("password", "Password", password, (e) => setPassword(e.target.value))}
                 {displayUserDoesNotExist && <span className='
                 justify-center text-center pt-2 text-sm text-red-500'> User not found</span>}
-                <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 px-4 rounded-full hover:bg-[var(--safron-mango)]" onClick={handleLogin}>Sign in</button>
+                <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 px-4 rounded-md hover:bg-[var(--safron-mango)]" onClick={handleLogin}>Sign in</button>
                 <span className="justify-center text-center pt-2 text-sm text-gray-500">Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={() => {
                     setType("register")
                     resetInfo()
-                    }
-                    }>Register</span></span>
+                }
+                }>Register</span></span>
             </div>
         )
     }
@@ -58,14 +58,14 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         )
     }
     const handleLogin = async () => {
-        try{
+        try {
             await loginService(email, password)
             onLoginSuccess()
         } catch (e) {
-            if(e.error == 'WRONG_PASSWORD'){
+            if (e.error == 'WRONG_PASSWORD') {
                 setHasWrongPassword(true)
             }
-            if(e.error == "NO_USER"){
+            if (e.error == "NO_USER") {
                 setDisplayUserDoesNotExist(true)
             }
 
@@ -75,8 +75,8 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         setIsLoading(true)
         try {
             // register the user
-            if(confirmPassword == password)
-                await register({ email, password})
+            if (confirmPassword == password)
+                await register({ email, password })
             else {
                 setHasWrongPassword(true)
                 throw Error

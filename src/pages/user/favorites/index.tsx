@@ -15,14 +15,13 @@ const Favorites = () => {
         const fetchInfo = async () => {
             const actualFavorites = await getFavorites()
             if (actualFavorites.length > 0) {
-                const songIds = actualFavorites.map((favorite: Favorite) => favorite.songId)
                 setIsLoading(true)
                 const songsResponse = await songApi.getFavoriteSongs(user.id, undefined) as Song[]
                 const songsObjects = songsResponse.reduce((acc: Record<string, Song>, song: Song) => {
                     acc[song.id] = song
                     return acc
                 }, {})
-                const reOrderedSongs = actualFavorites.map((favorite: Favorite) => songsObjects[favorite.songId])
+                const reOrderedSongs = actualFavorites.map((favorite: Favorite) => songsObjects[favorite.song_id])
                 setSongs(reOrderedSongs)
 
                 const artists = reOrderedSongs.map((song: Song) => song.artist as Artist)
@@ -42,9 +41,9 @@ const Favorites = () => {
         const formattedSongs = songs.map((song) => {
             return {
                 ...song,
-                title: song.title,
+                name: song.name,
                 subtitle: song.album.artist.name,
-                imageUrl: song.album.artist.imageUrl,
+                image_url: song.album.artist.image_url,
                 button_text: 'PLAY',
                 url: `/song/${song.id}`
             }
@@ -53,9 +52,9 @@ const Favorites = () => {
     }
     return (
         <div className="w-full h-full flex flex-col gap-5">
-            {songs.length > 0 || isLoading 
+            {songs.length > 0 || isLoading
                 ?
-                <List items={formatSongs(songs)} isLoading={isLoading} elements_qty={10} showIndex={false} /> 
+                <List items={formatSongs(songs)} isLoading={isLoading} elements_qty={10} showIndex={false} />
                 :
                 <div className="flex items-center justify-center h-96">
                     <div className="text-center">

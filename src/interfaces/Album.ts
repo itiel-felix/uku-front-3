@@ -5,7 +5,7 @@ export interface Album {
     id: string,
     artist: Artist,
     title: string,
-    imageUrl: string,
+    image_url: string,
     rating: number,
     release_date: string,
     spotifyUrl: string,

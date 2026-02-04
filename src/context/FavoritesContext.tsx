@@ -6,8 +6,8 @@ import { Favorite } from "../interfaces/Favorite";
 
 interface FavoritesContextType {
     favorites: Favorite[];
-    addFavorite: (songId: string) => void;
-    removeFavorite: (songId: string) => void;
+    addFavorite: (song_id: string) => void;
+    removeFavorite: (song_id: string) => void;
     getFavorites: () => Promise<Favorite[]>;
 }
 
@@ -21,25 +21,25 @@ export const FavoritesContext = createContext<FavoritesContextType>({
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     const [favorites, setFavorites] = useState<Favorite[]>([]);
     const { user } = useAuth()
-    const addFavorite = async (songId: string) => {
-        const response = await favorite.addFavorite({ songId, userId: user?.id })
+    const addFavorite = async (song_id: string) => {
+        const response = await favorite.addFavorite({ song_id, user_id: user?.id })
         setFavorites(prev => [...prev, response as Favorite])
     };
-    const removeFavorite = async (songId: string) => {
+    const removeFavorite = async (song_id: string) => {
         try {
-            await favorite.removeFavorite({ songId, userId: user?.id })
-            setFavorites(prev => prev.filter(f => f.songId !== songId))
+            await favorite.removeFavorite({ song_id, user_id: user?.id })
+            setFavorites(prev => prev.filter(f => f.song_id !== song_id))
         } catch (error) {
             console.error(error)
         }
     };
 
     const getFavorites = async () => {
-        if(user){
-        const response = await favorite.getFavorites(user?.id)
-        setFavorites(response as Favorite[])
-        return response as Favorite[]
-        }else{
+        if (user) {
+            const response = await favorite.getFavorites(user?.id)
+            setFavorites(response as Favorite[])
+            return response as Favorite[]
+        } else {
             setFavorites([])
         }
         return []

@@ -2,7 +2,7 @@ import { api } from "./client"
 
 
 const getArtists = async (id: string | undefined, query: Record<string, string> | undefined) => {
-    const response = await api.get(`/artists${id ? '/'+id : '' }`, { query: query ?? {} })
+    const response = await api.get(`/artists${id ? '/' + id : ''}`, { query: query ?? {} })
     return response
 }
 const getArtistPage = async (id: string | undefined) => {

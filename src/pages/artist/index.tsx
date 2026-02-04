@@ -12,7 +12,7 @@ const ArtistPage = ({
     propArtist: Artist | undefined,
 }) => {
     const [artist, setArtist] = useState<Artist | undefined>(propArtist)
-    const [albums, setAlbums] = useState([])
+    // const [albums, setAlbums] = useState([])
     const [songs, setSongs] = useState([]);
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const { id: artistId } = useParams<{ id: string }>()
@@ -27,9 +27,7 @@ const ArtistPage = ({
                 const responseArtist = await artistApi.getArtistPage(artistId ?? '')
                 setIsLoading(false)
                 setArtist(responseArtist as Artist)
-                const allSongs = (responseArtist as Artist).albums.reduce((acc, album) => {
-                    return [...acc, ...(album as Album).songs]
-                },[])
+                const allSongs = [...(responseArtist as Artist).songs ?? []]
                 setSongs(allSongs);
             } catch (error) {
                 console.error(error)
@@ -67,9 +65,9 @@ const ArtistPage = ({
         const formattedSongs = songs.map((song) => {
             return {
                 ...song,
-                title: song.title,
+                title: song.name,
                 subtitle: artist?.name,
-                imageUrl: artist?.imageUrl,
+                image_url: artist?.image_url,
                 button_text: 'PLAY',
                 url: `/song/${song.id}`
             }
@@ -86,7 +84,7 @@ const ArtistPage = ({
                         {/* Artist Image */}
                         <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white">
                             <img
-                                src={artist?.imageUrl}
+                                src={artist?.image_url}
                                 alt={artist?.name}
                                 className="w-full h-full object-cover"
                             />
@@ -129,10 +127,10 @@ const ArtistPage = ({
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold mb-6">Popular songs</h2>
                     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                        <List items={formatSongs(songs ?? [])} 
-                        onClick={(id) => navigate(`/song/${id}`)} 
-                        elements_qty={10} 
-                        isLoading={artist == null} />
+                        <List items={formatSongs(songs ?? [])}
+                            onClick={(id) => navigate(`/song/${id}`)}
+                            elements_qty={10}
+                            isLoading={artist == null} />
                     </div>
                 </div>
                 {/* Albums Section */}
@@ -145,7 +143,7 @@ const ArtistPage = ({
                                 className="flex flex-col items-center justify-center max-w-45 max-h-55 bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer aspect-square"
                             >
                                 <div className="h-full w-full bg-gray-200 rounded mb-3 flex items-center justify-center aspect-square rounded-lg">
-                                    <img src={album.imageUrl} alt={album.title} className="w-full h-full object-cover rounded-lg" />
+                                    <img src={album.image_url} alt={album.title} className="w-full h-full object-cover rounded-lg" />
                                 </div>
                                 <div className="h-full w-full flex flex-col ">
                                     <h3 className="font-semibold text-sm ">{album.title}</h3>

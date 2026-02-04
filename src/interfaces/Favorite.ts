@@ -2,8 +2,8 @@ import { Song } from "./Song";
 
 export interface Favorite {
     id: string;
-    songId: string;
-    userId: string;
+    song_id: string;
+    user_id: string;
     song: Song;
     created_at: string;
 }
