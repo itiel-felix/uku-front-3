@@ -41,7 +41,7 @@ const UpperBar = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: 
         if (!isLoggedIn) {
             return (
                 <div className="text-xs">
-                    <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 px-4 rounded-full hover:bg-[var(--safron-mango)]" onClick={() => {
+                    <button className="bg-[var(--safron-mango-dark)] text-white cursor-pointer p-2 px-4 rounded-md hover:bg-[var(--safron-mango)]" onClick={() => {
                         setLoginModalOpen(true)
                     }}>Sign in</button>
                 </div>
